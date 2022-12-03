@@ -75,17 +75,29 @@ fn yr_2022_day_02() {
     println!("ans2 is {:?}", ans2);
 }
 
-fn invoke_solutions(year: &str, day: &str, fn1: impl Fn(&str) -> i32, fn2: impl Fn(&str) -> i32) {
+fn invoke_solutions(
+    year: &str,
+    day: &str,
+    fn1: impl Fn(&str) -> i32,
+    fn2: impl Fn(&str) -> i32,
+    debug_only: bool,
+) {
     let play = format!("./src/yr_{year}/test_cases/day_{day}_play.txt");
     let real = format!("./src/yr_{year}/test_cases/day_{day}_real.txt");
     let ans1 = fn1(&play);
+
     println!("ans1 is {:?}", ans1);
-    let ans1 = fn1(&real);
-    println!("ans1 is {:?}", ans1);
+    if !debug_only {
+        let ans1 = fn1(&real);
+        println!("ans1 is {:?}", ans1);
+    }
+
     let ans2 = fn2(&play);
     println!("ans2 is {:?}", ans2);
-    let ans2 = fn2(&real);
-    println!("ans2 is {:?}", ans2);
+    if !debug_only {
+        let ans2 = fn2(&real);
+        println!("ans2 is {:?}", ans2);
+    }
 }
 
 fn main() {
@@ -97,5 +109,6 @@ fn main() {
         "03",
         yr_2022::problems::day_03::solution_1,
         yr_2022::problems::day_03::solution_2,
+        false,
     );
 }
