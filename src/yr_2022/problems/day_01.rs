@@ -4,6 +4,7 @@ use std::collections::HashMap;
 
 use crate::yr_2022::problems::utils;
 
+#[allow(dead_code)]
 pub fn solution_2(input_file: &str) -> i32 {
     let k = 3;
     let lines = utils::read_file(input_file).unwrap();
@@ -45,6 +46,7 @@ pub fn solution_2(input_file: &str) -> i32 {
     ans
 }
 
+#[allow(dead_code)]
 pub fn solution_1(input_file: &str) -> i32 {
     let lines = utils::read_file(input_file).unwrap();
     let mut elf_no = 0;
