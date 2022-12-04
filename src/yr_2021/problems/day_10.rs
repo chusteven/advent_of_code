@@ -86,6 +86,7 @@ fn score_stack(
     ans
 }
 
+#[allow(dead_code)]
 pub fn solution_1(input_file: &str) -> i32 {
     let mut map = HashMap::new();
     map.insert(")".to_string(), "(".to_string());

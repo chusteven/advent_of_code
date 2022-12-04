@@ -4,6 +4,7 @@ use std::collections::{HashMap, HashSet};
 
 use crate::yr_2022::problems::utils;
 
+#[allow(dead_code)]
 pub fn solution_2(input_file: &str) -> i32 {
     let lines = utils::read_file(input_file).unwrap();
     let scoring = get_scoring();
@@ -39,6 +40,7 @@ fn get_overlapping_char_across_lines(lines: &[String]) -> String {
     panic!("This shouldn't have happened o.O")
 }
 
+#[allow(dead_code)]
 pub fn solution_1(input_file: &str) -> i32 {
     let lines = utils::read_file(input_file).unwrap();
     let scoring = get_scoring();
