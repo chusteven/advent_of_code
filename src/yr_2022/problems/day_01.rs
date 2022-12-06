@@ -11,7 +11,7 @@ pub fn solution_2(input_file: &str) -> i32 {
     let mut elf_no = 0;
     let mut elf_cals = HashMap::new();
     for line in lines.iter() {
-        if line == "" {
+        if line.is_empty() {
             elf_no += 1;
             continue;
         }
@@ -56,7 +56,7 @@ pub fn solution_1(input_file: &str) -> i32 {
     let mut elf_cals = HashMap::new();
     let mut ans = 0;
     for line in lines.iter() {
-        if line == "" {
+        if line.is_empty() {
             elf_no += 1;
             continue;
         }

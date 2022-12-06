@@ -26,7 +26,7 @@ pub fn solution_2(input_file: &str) -> i32 {
     mapping.insert("Z", "scissors");
     let mut ans = 0;
     for line in lines.iter() {
-        let parts: Vec<&str> = line.split(" ").collect();
+        let parts: Vec<&str> = line.split(' ').collect();
         let opp = parts[0];
         let res = parts[1];
         ans += process_round_actual(opp, res, &winning, &losing, &scoring, &mapping);
@@ -84,7 +84,7 @@ pub fn solution_1(input_file: &str) -> i32 {
     mapping.insert("Z", "scissors");
     let mut ans = 0;
     for line in lines.iter() {
-        let parts: Vec<&str> = line.split(" ").collect();
+        let parts: Vec<&str> = line.split(' ').collect();
         let opp = parts[0];
         let mine = parts[1];
         ans += process_round(opp, mine, &winning, &scoring, &mapping);

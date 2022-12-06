@@ -2,11 +2,12 @@ use std::str::FromStr;
 
 use crate::yr_2022::problems::utils;
 
+#[allow(dead_code)]
 pub fn solution_2(input_file: &str) -> i32 {
     let lines = utils::read_file(input_file).unwrap();
     let mut ans = 0;
     for line in lines.iter() {
-        let ranges: Vec<&str> = line.split(",").collect();
+        let ranges: Vec<&str> = line.split(',').collect();
         if contains_any_overlap(ranges) {
             ans += 1;
         }
@@ -25,11 +26,12 @@ fn contains_any_overlap(ranges: Vec<&str>) -> bool {
     false
 }
 
+#[allow(dead_code)]
 pub fn solution_1(input_file: &str) -> i32 {
     let lines = utils::read_file(input_file).unwrap();
     let mut ans = 0;
     for line in lines.iter() {
-        let ranges: Vec<&str> = line.split(",").collect();
+        let ranges: Vec<&str> = line.split(',').collect();
         if contains_full_overlap(ranges) {
             ans += 1;
         }
@@ -50,7 +52,7 @@ fn contains_full_overlap(ranges: Vec<&str>) -> bool {
 
 fn get_min_max_of_range(range: &str) -> (i32, i32) {
     let parts: Vec<i32> = range
-        .split("-")
+        .split('-')
         .map(|d| <i32 as FromStr>::from_str(d).unwrap())
         .collect();
     (parts[0], parts[1])
