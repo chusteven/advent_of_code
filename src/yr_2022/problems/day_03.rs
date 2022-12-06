@@ -21,12 +21,12 @@ pub fn solution_2(input_file: &str) -> i32 {
 fn get_overlapping_char_across_lines(lines: &[String]) -> String {
     let first_line = &lines[0];
     let mut chars = HashSet::new();
-    for c in first_line.chars().into_iter() {
+    for c in first_line.chars() {
         chars.insert(c);
     }
     for line in lines[1..].iter() {
         let mut new = HashSet::new();
-        for c in line.chars().into_iter() {
+        for c in line.chars() {
             if chars.contains(&c) {
                 new.insert(c);
             }
@@ -34,7 +34,7 @@ fn get_overlapping_char_across_lines(lines: &[String]) -> String {
         chars = new; // Is this idiomatic??
     }
     // Wish I could `pop` from a `HashSet` but ¯\_(ツ)_/¯
-    for c in chars.iter() {
+    if let Some(c) = chars.iter().next() {
         return c.to_string();
     }
     panic!("This shouldn't have happened o.O")
