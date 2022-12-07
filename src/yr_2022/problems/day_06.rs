@@ -37,7 +37,7 @@ fn get_index_of_marker(line: &str, n: usize) -> usize {
                 // We need to find where it previously was
                 let prv = e.remove();
                 let diff = i - prv;
-                maybe_remove(&mut uniqs, n - diff - 1, prv);
+                maybe_remove(&mut uniqs, prv);
                 cnt = diff;
                 uniqs.insert(c, i);
             }
@@ -46,11 +46,11 @@ fn get_index_of_marker(line: &str, n: usize) -> usize {
     0
 }
 
-fn maybe_remove(map: &mut HashMap<char, usize>, n: usize, from: usize) {
+fn maybe_remove(map: &mut HashMap<char, usize>, from: usize) {
     let chars_to_remove: Vec<char> = map
         .iter()
-        .filter(|(c, i)| **i < from)
-        .map(|(c, _)| *c)
+        .filter(|(_, i)| **i < from)
+        .map(|(c, _)| *c) // Wonder if I could get away with not copying
         .collect();
     chars_to_remove.iter().for_each(|c| {
         map.remove(c);
