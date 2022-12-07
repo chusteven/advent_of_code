@@ -3,6 +3,7 @@ use std::collections::HashMap;
 
 use crate::yr_2022::problems::utils;
 
+#[allow(dead_code)]
 pub fn solution_2(filepath: &str) -> i32 {
     let lines = utils::read_file(filepath).unwrap();
     for line in lines.iter() {
@@ -12,6 +13,7 @@ pub fn solution_2(filepath: &str) -> i32 {
     0
 }
 
+#[allow(dead_code)]
 pub fn solution_1(filepath: &str) -> i32 {
     let lines = utils::read_file(filepath).unwrap();
     for line in lines.iter() {
