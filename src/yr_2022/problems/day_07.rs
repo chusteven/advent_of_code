@@ -9,7 +9,7 @@ pub fn solution_2(filepath: &str) -> i32 {
 }
 
 ///
-/// Mean to approximate also need to keep track of
+/// Meant to approximate also need to keep track of
 /// what each `cur_dir` contains; something like:
 ///
 /// ```json
@@ -32,6 +32,7 @@ pub fn solution_1(filepath: &str) -> i32 {
     let mut cur_dir = "";
     let mut dirs = vec![];
     let mut filesystem: HashMap<&str, Path> = HashMap::new();
+    let mut child_to_parent: HashMap<&str, &str> = HashMap::new();
 
     for line in lines.iter() {
         let raw_command: &str;
@@ -42,6 +43,7 @@ pub fn solution_1(filepath: &str) -> i32 {
                 if *nav_path == ".." {
                     cur_dir = dirs.pop().unwrap();
                 } else {
+                    child_to_parent.insert(nav_path, cur_dir);
                     dirs.push(nav_path);
                     cur_dir = nav_path;
                 }
@@ -96,13 +98,17 @@ pub fn solution_1(filepath: &str) -> i32 {
         .for_each(|(k, _)| {
             dirs_to_update.push(*k);
         });
-    update_filesystem(&mut filesystem, &mut dirs_to_update);
+    update_filesystem(&mut filesystem, &mut dirs_to_update, &child_to_parent);
     println!("{:?}", dirs_to_update);
     println!("{:?}", filesystem);
     0
 }
 
-fn update_filesystem(filesystem: &mut HashMap<&str, Path>, dirs_to_update: &mut Vec<&str>) {
+fn update_filesystem(
+    filesystem: &mut HashMap<&str, Path>,
+    dirs_to_update: &mut Vec<&str>,
+    child_to_parent: &HashMap<&str, &str>,
+) {
     // While loop
     // Inside each iteration,
     // Investigate one level deeper
@@ -110,4 +116,14 @@ fn update_filesystem(filesystem: &mut HashMap<&str, Path>, dirs_to_update: &mut 
     // To its own total_size
     // Then set to parents
     // Do it until get to "/"
+
+    let dirs_to_update = &*dirs_to_update;
+    loop {
+        for dir in dirs_to_update {
+            if let Some(parent) = child_to_parent.get(dir) {
+                let v = filesystem.get_mut(parent).unwrap();
+                v.total_size += filesystem.get(dir).unwrap().total_size;
+            }
+        }
+    }
 }
