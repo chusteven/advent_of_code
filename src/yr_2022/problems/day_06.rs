@@ -36,9 +36,8 @@ fn get_index_of_marker(line: &str, n: usize) -> usize {
             Occupied(e) => {
                 // We need to find where it previously was
                 let prv = e.remove();
-                let diff = i - prv;
-                maybe_remove(&mut uniqs, prv);
-                cnt = diff;
+                remove_prior_to_index(&mut uniqs, prv); // Interesting that I can send a mutable refernce to uniqus from within an entry!
+                cnt = i - prv;
                 uniqs.insert(c, i);
             }
         }
@@ -46,10 +45,10 @@ fn get_index_of_marker(line: &str, n: usize) -> usize {
     0
 }
 
-fn maybe_remove(map: &mut HashMap<char, usize>, from: usize) {
+fn remove_prior_to_index(map: &mut HashMap<char, usize>, from: usize) {
     let chars_to_remove: Vec<char> = map
         .iter()
-        .filter(|(_, i)| **i < from)
+        .filter(|(_, i)| **i < from) // 😵‍💫
         .map(|(c, _)| *c) // Wonder if I could get away with not copying
         .collect();
     chars_to_remove.iter().for_each(|c| {
