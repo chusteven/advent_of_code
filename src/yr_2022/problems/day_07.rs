@@ -61,6 +61,7 @@ pub fn solution_1(filepath: &str) -> i32 {
                 let raw_dir = parts[1].trim();
                 let mut dirs_clone = dirs.clone();
                 dirs_clone.push(raw_dir.to_string());
+                // FIXME: It only contains the directories seen so far
                 let dir = dirs_clone.join("/");
                 match filesystem.entry(cur_dir.to_string()) {
                     Vacant(e) => {
@@ -95,6 +96,9 @@ pub fn solution_1(filepath: &str) -> i32 {
             }
         }
     }
+    // FIXME: Becuase of L:64, I think I need to do top-down traversal
+    // (recursion), rather than bottoms-up siiiiigh
+
     // I think it makes sense to recursive do stuff at the end;
     // So we need to find all the bottom level directories and then
     // update those one up from them
@@ -108,7 +112,7 @@ pub fn solution_1(filepath: &str) -> i32 {
     // println!("{:?}", child_to_parent);
     // println!("{:?}", filesystem);
     // println!("{:?}", dirs_to_update);
-    update_filesystem(filesystem, dirs_to_update, child_to_parent);
+    update_filesystem_bottoms_up(filesystem, dirs_to_update, child_to_parent);
     0
 }
 
@@ -121,9 +125,7 @@ pub fn solution_1(filepath: &str) -> i32 {
 /// Then set to parents
 /// Do it until get to "/"
 ///
-/// Or could do recursion o__o
-///
-fn update_filesystem(
+fn update_filesystem_bottoms_up(
     mut filesystem: HashMap<String, Path>,
     mut dirs_to_update: Vec<String>,
     child_to_parent: HashMap<String, String>,
@@ -161,11 +163,19 @@ fn update_filesystem(
             break;
         }
     }
+
+    // For debugging
+    // let mut sorted = vec![];
+    // for (k, v) in filesystem.iter() {
+    //     sorted.push((k, v));
+    // }
+    // sorted.sort_by(|(a, _), (b, _)| a.cmp(b));
+    // println!("{:#?}", sorted);
+
     let ans = filesystem
         .iter()
         .map(|(_, v)| v.total_size)
         .filter(|v| *v <= 100_000)
         .sum::<i32>();
-    // println!("{:?}", filesystem);
     println!("ans (part i) is: {ans}");
 }
