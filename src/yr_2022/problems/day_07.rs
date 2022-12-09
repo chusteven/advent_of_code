@@ -165,12 +165,12 @@ fn update_filesystem_bottoms_up(
     }
 
     // For debugging
-    // let mut sorted = vec![];
-    // for (k, v) in filesystem.iter() {
-    //     sorted.push((k, v));
-    // }
-    // sorted.sort_by(|(a, _), (b, _)| a.cmp(b));
-    // println!("{:#?}", sorted);
+    let mut sorted = vec![];
+    for (k, v) in filesystem.iter() {
+        sorted.push((k, v));
+    }
+    sorted.sort_by(|(a, _), (b, _)| a.cmp(b));
+    println!("{:#?}", sorted);
 
     let ans = filesystem
         .iter()
