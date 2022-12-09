@@ -28,9 +28,16 @@ pub fn solution_2(filepath: &str) -> i32 {
     ans
 }
 
+///
+/// I don't think this is the best runtime-sensitive solution...
+/// though I did try and think of how to use the prefix sums,
+/// but couldn't come up with anything off the top of my head.
+///
 fn get_scenic_score(i: i32, j: i32, lines: &Vec<Vec<i32>>) -> i32 {
     let cmp = lines[i as usize][j as usize];
     let mut ans = 1;
+
+    // TODO: DRY this code
 
     let mut _i = i - 1;
     let mut view = 0;
@@ -115,7 +122,7 @@ pub fn solution_1(filepath: &str) -> i32 {
     let mut ans = (rows * 2) + ((cols - 2) * 2);
     for i in 1..(rows - 1) {
         for j in 1..(cols - 1) {
-            let cur = lines[i][j]; // At (1, 2): 5
+            let cur = lines[i][j];
             if cur > lsums[i][j - 1]
                 || cur > rsums[i][j + 1]
                 || cur > dsums[i - 1][j]
@@ -128,6 +135,11 @@ pub fn solution_1(filepath: &str) -> i32 {
     ans.try_into().unwrap()
 }
 
+///
+/// There's probably a way to make this and `build_ud_sums` more general
+/// in terms of knowing what direction to go in -- would require
+/// only one method with another parameter, probably
+///
 fn build_lr_sums(lines: &[Vec<i32>], start: usize, end: usize) -> Vec<Vec<i32>> {
     let range: Vec<usize> = if start < end {
         (start..end).into_iter().collect()
