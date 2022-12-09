@@ -35,9 +35,9 @@ fn invoke_solutions(
 fn main() {
     invoke_solutions(
         "2022",
-        "06",
-        yr_2022::problems::day_06::solution_1,
-        yr_2022::problems::day_06::solution_2,
+        "08",
+        yr_2022::problems::day_08::solution_1,
+        yr_2022::problems::day_08::solution_2,
         false,
     );
 }
