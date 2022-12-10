@@ -1,3 +1,4 @@
+use std::cell::RefCell;
 use std::collections::hash_map::Entry::{Occupied, Vacant};
 use std::collections::{HashMap, HashSet};
 
@@ -31,8 +32,9 @@ pub fn solution_1(filepath: &str) -> i32 {
     let mut is_listing: bool = false;
     let cur_dir = &mut String::new();
     let mut dirs: Vec<String> = vec![];
-    let mut filesystem: HashMap<String, Path> = HashMap::new();
+    let mut filesystem: HashMap<String, RefCell<Path>> = HashMap::new();
     let mut child_to_parent: HashMap<String, String> = HashMap::new();
+    let mut parent_to_child: HashMap<String, String> = HashMap::new();
 
     for (_i, line) in lines.iter().enumerate() {
         if line.starts_with("$ ") {
@@ -44,6 +46,7 @@ pub fn solution_1(filepath: &str) -> i32 {
                 } else {
                     dirs.push(nav_path.to_string());
                     child_to_parent.insert(dirs.join("/"), cur_dir.to_string());
+                    parent_to_child.insert(cur_dir.to_string(), dirs.join("/"));
                 }
                 *cur_dir = dirs.join("/");
                 is_listing = false;
@@ -67,13 +70,13 @@ pub fn solution_1(filepath: &str) -> i32 {
                     Vacant(e) => {
                         let mut set = HashSet::new();
                         set.insert(dir);
-                        e.insert(Path {
+                        e.insert(RefCell::new(Path {
                             total_size: 0,
                             dirs: set,
-                        });
+                        }));
                     }
                     Occupied(mut e) => {
-                        let p = e.get_mut();
+                        let mut p = e.get_mut().borrow_mut();
                         let tmp_dirs = &mut p.dirs;
                         tmp_dirs.insert(dir);
                     }
@@ -83,37 +86,49 @@ pub fn solution_1(filepath: &str) -> i32 {
                 let size = first.trim().to_string().parse::<i32>().unwrap();
                 match filesystem.entry(cur_dir.to_string()) {
                     Vacant(e) => {
-                        e.insert(Path {
+                        e.insert(RefCell::new(Path {
                             total_size: size,
                             dirs: HashSet::new(),
-                        });
+                        }));
                     }
                     Occupied(mut e) => {
-                        let p = e.get_mut();
+                        let mut p = e.get_mut().borrow_mut();
                         p.total_size += size;
                     }
                 }
             }
         }
     }
-    // FIXME: Becuase of L:64, I think I need to do top-down traversal
-    // (recursion), rather than bottoms-up siiiiigh
-
-    // I think it makes sense to recursive do stuff at the end;
-    // So we need to find all the bottom level directories and then
-    // update those one up from them
-    let mut dirs_to_update = vec![];
+    let cur_dir = "/";
+    recurse(cur_dir, &filesystem, &parent_to_child);
     filesystem
         .iter()
-        .filter(|(_, p)| p.dirs.is_empty())
-        .for_each(|(k, _)| {
-            dirs_to_update.push(k.to_string());
-        });
-    // println!("{:?}", child_to_parent);
-    // println!("{:?}", filesystem);
-    // println!("{:?}", dirs_to_update);
-    update_filesystem_bottoms_up(filesystem, dirs_to_update, child_to_parent);
-    0
+        .map(|(_, v)| v)
+        .map(|v| {
+            let path = v.borrow();
+            path.total_size
+        })
+        .filter(|s| s <= &100_000)
+        .sum()
+}
+
+fn recurse(
+    cur_dir: &str,
+    filesystem: &HashMap<String, RefCell<Path>>,
+    parent_to_child: &HashMap<String, String>,
+) -> i32 {
+    let tmp = filesystem.get(cur_dir).unwrap().clone();
+    let dir = tmp.borrow();
+    if dir.dirs.is_empty() {
+        return dir.total_size;
+    }
+    let mut size = 0;
+    for child in &dir.dirs {
+        size += recurse(&child, &filesystem, parent_to_child);
+    }
+    let mut dir = filesystem.get(cur_dir).unwrap().borrow_mut();
+    dir.total_size += size;
+    dir.total_size
 }
 
 ///
