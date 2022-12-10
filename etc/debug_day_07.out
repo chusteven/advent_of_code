@@ -1,0 +1,1574 @@
+[
+    (
+        "/",
+        Path {
+            total_size: 48381165,
+            dirs: {
+                "//a",
+                "//d",
+            },
+        },
+    ),
+    (
+        "//a",
+        Path {
+            total_size: 94853,
+            dirs: {
+                "//a/e",
+            },
+        },
+    ),
+    (
+        "//a/e",
+        Path {
+            total_size: 584,
+            dirs: {},
+        },
+    ),
+    (
+        "//d",
+        Path {
+            total_size: 24933642,
+            dirs: {},
+        },
+    ),
+]
+ans (part i) is: 95437
+ans1 is 0
+[
+    (
+        "/",
+        Path {
+            total_size: 10907143,
+            dirs: {
+                "//tvcr",
+                "//vhjbjr",
+                "//vvsg",
+                "//jlcbpsr",
+                "//bntdgzs",
+                "//hsswswtq",
+                "//jdfwmhg",
+            },
+        },
+    ),
+    (
+        "//bntdgzs",
+        Path {
+            total_size: 297955,
+            dirs: {},
+        },
+    ),
+    (
+        "//hsswswtq",
+        Path {
+            total_size: 5466456,
+            dirs: {
+                "//hsswswtq/wtrsg",
+                "//hsswswtq/bsjbvff",
+                "//hsswswtq/dpgvp",
+                "//hsswswtq/jdfwmhg",
+                "//hsswswtq/hldgfpvh",
+                "//hsswswtq/jtgdv",
+                "//hsswswtq/vcbqdj",
+            },
+        },
+    ),
+    (
+        "//hsswswtq/bsjbvff",
+        Path {
+            total_size: 905857,
+            dirs: {
+                "//hsswswtq/bsjbvff/dmnt",
+            },
+        },
+    ),
+    (
+        "//hsswswtq/bsjbvff/dmnt",
+        Path {
+            total_size: 221038,
+            dirs: {},
+        },
+    ),
+    (
+        "//hsswswtq/dpgvp",
+        Path {
+            total_size: 1554138,
+            dirs: {
+                "//hsswswtq/dpgvp/tssm",
+                "//hsswswtq/dpgvp/fzttpjtd",
+                "//hsswswtq/dpgvp/rwz",
+                "//hsswswtq/dpgvp/jdrbwrc",
+            },
+        },
+    ),
+    (
+        "//hsswswtq/dpgvp/fzttpjtd",
+        Path {
+            total_size: 149872,
+            dirs: {},
+        },
+    ),
+    (
+        "//hsswswtq/dpgvp/jdrbwrc",
+        Path {
+            total_size: 152567,
+            dirs: {
+                "//hsswswtq/dpgvp/jdrbwrc/ptsd",
+            },
+        },
+    ),
+    (
+        "//hsswswtq/dpgvp/jdrbwrc/ptsd",
+        Path {
+            total_size: 2594,
+            dirs: {},
+        },
+    ),
+    (
+        "//hsswswtq/dpgvp/rwz",
+        Path {
+            total_size: 751224,
+            dirs: {
+                "//hsswswtq/dpgvp/rwz/jdfwmhg",
+            },
+        },
+    ),
+    (
+        "//hsswswtq/dpgvp/rwz/jdfwmhg",
+        Path {
+            total_size: 448416,
+            dirs: {},
+        },
+    ),
+    (
+        "//hsswswtq/dpgvp/tssm",
+        Path {
+            total_size: 500475,
+            dirs: {
+                "//hsswswtq/dpgvp/tssm/ptsd",
+            },
+        },
+    ),
+    (
+        "//hsswswtq/dpgvp/tssm/ptsd",
+        Path {
+            total_size: 248137,
+            dirs: {},
+        },
+    ),
+    (
+        "//hsswswtq/hldgfpvh",
+        Path {
+            total_size: 645662,
+            dirs: {},
+        },
+    ),
+    (
+        "//hsswswtq/jdfwmhg",
+        Path {
+            total_size: 350260,
+            dirs: {
+                "//hsswswtq/jdfwmhg/jdfwmhg",
+                "//hsswswtq/jdfwmhg/qdtbvqjj",
+            },
+        },
+    ),
+    (
+        "//hsswswtq/jdfwmhg/jdfwmhg",
+        Path {
+            total_size: 6355523,
+            dirs: {
+                "//hsswswtq/jdfwmhg/jdfwmhg/sjw",
+                "//hsswswtq/jdfwmhg/jdfwmhg/bvm",
+                "//hsswswtq/jdfwmhg/jdfwmhg/hsswswtq",
+                "//hsswswtq/jdfwmhg/jdfwmhg/zpfdtl",
+            },
+        },
+    ),
+    (
+        "//hsswswtq/jdfwmhg/jdfwmhg/bvm",
+        Path {
+            total_size: 3626185,
+            dirs: {
+                "//hsswswtq/jdfwmhg/jdfwmhg/bvm/qtwvdtsp",
+                "//hsswswtq/jdfwmhg/jdfwmhg/bvm/hstg",
+                "//hsswswtq/jdfwmhg/jdfwmhg/bvm/nvmvghb",
+                "//hsswswtq/jdfwmhg/jdfwmhg/bvm/hsswswtq",
+            },
+        },
+    ),
+    (
+        "//hsswswtq/jdfwmhg/jdfwmhg/bvm/hsswswtq",
+        Path {
+            total_size: 2229261,
+            dirs: {
+                "//hsswswtq/jdfwmhg/jdfwmhg/bvm/hsswswtq/rjtrhgwh",
+                "//hsswswtq/jdfwmhg/jdfwmhg/bvm/hsswswtq/qhp",
+                "//hsswswtq/jdfwmhg/jdfwmhg/bvm/hsswswtq/ddcjvjgf",
+                "//hsswswtq/jdfwmhg/jdfwmhg/bvm/hsswswtq/ptsd",
+            },
+        },
+    ),
+    (
+        "//hsswswtq/jdfwmhg/jdfwmhg/bvm/hsswswtq/ddcjvjgf",
+        Path {
+            total_size: 998150,
+            dirs: {},
+        },
+    ),
+    (
+        "//hsswswtq/jdfwmhg/jdfwmhg/bvm/hsswswtq/ptsd",
+        Path {
+            total_size: 586416,
+            dirs: {
+                "//hsswswtq/jdfwmhg/jdfwmhg/bvm/hsswswtq/ptsd/wpbdrcw",
+            },
+        },
+    ),
+    (
+        "//hsswswtq/jdfwmhg/jdfwmhg/bvm/hsswswtq/ptsd/wpbdrcw",
+        Path {
+            total_size: 371435,
+            dirs: {},
+        },
+    ),
+    (
+        "//hsswswtq/jdfwmhg/jdfwmhg/bvm/hsswswtq/qhp",
+        Path {
+            total_size: 293198,
+            dirs: {},
+        },
+    ),
+    (
+        "//hsswswtq/jdfwmhg/jdfwmhg/bvm/hsswswtq/rjtrhgwh",
+        Path {
+            total_size: 224393,
+            dirs: {},
+        },
+    ),
+    (
+        "//hsswswtq/jdfwmhg/jdfwmhg/bvm/hstg",
+        Path {
+            total_size: 617385,
+            dirs: {
+                "//hsswswtq/jdfwmhg/jdfwmhg/bvm/hstg/thdhg",
+            },
+        },
+    ),
+    (
+        "//hsswswtq/jdfwmhg/jdfwmhg/bvm/hstg/thdhg",
+        Path {
+            total_size: 201896,
+            dirs: {},
+        },
+    ),
+    (
+        "//hsswswtq/jdfwmhg/jdfwmhg/bvm/nvmvghb",
+        Path {
+            total_size: 974876,
+            dirs: {
+                "//hsswswtq/jdfwmhg/jdfwmhg/bvm/nvmvghb/rqjbplv",
+                "//hsswswtq/jdfwmhg/jdfwmhg/bvm/nvmvghb/rvwd",
+                "//hsswswtq/jdfwmhg/jdfwmhg/bvm/nvmvghb/vtjd",
+            },
+        },
+    ),
+    (
+        "//hsswswtq/jdfwmhg/jdfwmhg/bvm/nvmvghb/rqjbplv",
+        Path {
+            total_size: 105204,
+            dirs: {},
+        },
+    ),
+    (
+        "//hsswswtq/jdfwmhg/jdfwmhg/bvm/nvmvghb/rvwd",
+        Path {
+            total_size: 66170,
+            dirs: {},
+        },
+    ),
+    (
+        "//hsswswtq/jdfwmhg/jdfwmhg/bvm/nvmvghb/vtjd",
+        Path {
+            total_size: 300524,
+            dirs: {
+                "//hsswswtq/jdfwmhg/jdfwmhg/bvm/nvmvghb/vtjd/ptsd",
+            },
+        },
+    ),
+    (
+        "//hsswswtq/jdfwmhg/jdfwmhg/bvm/nvmvghb/vtjd/ptsd",
+        Path {
+            total_size: 300524,
+            dirs: {},
+        },
+    ),
+    (
+        "//hsswswtq/jdfwmhg/jdfwmhg/bvm/qtwvdtsp",
+        Path {
+            total_size: 289574,
+            dirs: {},
+        },
+    ),
+    (
+        "//hsswswtq/jdfwmhg/jdfwmhg/hsswswtq",
+        Path {
+            total_size: 1990363,
+            dirs: {
+                "//hsswswtq/jdfwmhg/jdfwmhg/hsswswtq/vst",
+                "//hsswswtq/jdfwmhg/jdfwmhg/hsswswtq/pttnl",
+                "//hsswswtq/jdfwmhg/jdfwmhg/hsswswtq/qdtbvqjj",
+                "//hsswswtq/jdfwmhg/jdfwmhg/hsswswtq/jzpbdcmc",
+            },
+        },
+    ),
+    (
+        "//hsswswtq/jdfwmhg/jdfwmhg/hsswswtq/jzpbdcmc",
+        Path {
+            total_size: 922620,
+            dirs: {
+                "//hsswswtq/jdfwmhg/jdfwmhg/hsswswtq/jzpbdcmc/zzswd",
+                "//hsswswtq/jdfwmhg/jdfwmhg/hsswswtq/jzpbdcmc/qwc",
+            },
+        },
+    ),
+    (
+        "//hsswswtq/jdfwmhg/jdfwmhg/hsswswtq/jzpbdcmc/qwc",
+        Path {
+            total_size: 409037,
+            dirs: {},
+        },
+    ),
+    (
+        "//hsswswtq/jdfwmhg/jdfwmhg/hsswswtq/jzpbdcmc/zzswd",
+        Path {
+            total_size: 216062,
+            dirs: {},
+        },
+    ),
+    (
+        "//hsswswtq/jdfwmhg/jdfwmhg/hsswswtq/pttnl",
+        Path {
+            total_size: 508620,
+            dirs: {},
+        },
+    ),
+    (
+        "//hsswswtq/jdfwmhg/jdfwmhg/hsswswtq/qdtbvqjj",
+        Path {
+            total_size: 34667,
+            dirs: {},
+        },
+    ),
+    (
+        "//hsswswtq/jdfwmhg/jdfwmhg/hsswswtq/vst",
+        Path {
+            total_size: 290186,
+            dirs: {
+                "//hsswswtq/jdfwmhg/jdfwmhg/hsswswtq/vst/zpcqhml",
+            },
+        },
+    ),
+    (
+        "//hsswswtq/jdfwmhg/jdfwmhg/hsswswtq/vst/zpcqhml",
+        Path {
+            total_size: 219936,
+            dirs: {},
+        },
+    ),
+    (
+        "//hsswswtq/jdfwmhg/jdfwmhg/sjw",
+        Path {
+            total_size: 427654,
+            dirs: {},
+        },
+    ),
+    (
+        "//hsswswtq/jdfwmhg/jdfwmhg/zpfdtl",
+        Path {
+            total_size: 189042,
+            dirs: {},
+        },
+    ),
+    (
+        "//hsswswtq/jdfwmhg/qdtbvqjj",
+        Path {
+            total_size: 2547254,
+            dirs: {
+                "//hsswswtq/jdfwmhg/qdtbvqjj/hvlffb",
+                "//hsswswtq/jdfwmhg/qdtbvqjj/qdtbvqjj",
+                "//hsswswtq/jdfwmhg/qdtbvqjj/ftz",
+                "//hsswswtq/jdfwmhg/qdtbvqjj/lzbb",
+            },
+        },
+    ),
+    (
+        "//hsswswtq/jdfwmhg/qdtbvqjj/ftz",
+        Path {
+            total_size: 1746768,
+            dirs: {
+                "//hsswswtq/jdfwmhg/qdtbvqjj/ftz/fft",
+                "//hsswswtq/jdfwmhg/qdtbvqjj/ftz/qdtbvqjj",
+            },
+        },
+    ),
+    (
+        "//hsswswtq/jdfwmhg/qdtbvqjj/ftz/fft",
+        Path {
+            total_size: 451858,
+            dirs: {},
+        },
+    ),
+    (
+        "//hsswswtq/jdfwmhg/qdtbvqjj/ftz/qdtbvqjj",
+        Path {
+            total_size: 647726,
+            dirs: {
+                "//hsswswtq/jdfwmhg/qdtbvqjj/ftz/qdtbvqjj/fgqhdh",
+            },
+        },
+    ),
+    (
+        "//hsswswtq/jdfwmhg/qdtbvqjj/ftz/qdtbvqjj/fgqhdh",
+        Path {
+            total_size: 343153,
+            dirs: {},
+        },
+    ),
+    (
+        "//hsswswtq/jdfwmhg/qdtbvqjj/hvlffb",
+        Path {
+            total_size: 6682,
+            dirs: {},
+        },
+    ),
+    (
+        "//hsswswtq/jdfwmhg/qdtbvqjj/lzbb",
+        Path {
+            total_size: 3722250,
+            dirs: {
+                "//hsswswtq/jdfwmhg/qdtbvqjj/lzbb/ptsd",
+                "//hsswswtq/jdfwmhg/qdtbvqjj/lzbb/bbvml",
+                "//hsswswtq/jdfwmhg/qdtbvqjj/lzbb/pffntc",
+                "//hsswswtq/jdfwmhg/qdtbvqjj/lzbb/fjs",
+                "//hsswswtq/jdfwmhg/qdtbvqjj/lzbb/pnltt",
+            },
+        },
+    ),
+    (
+        "//hsswswtq/jdfwmhg/qdtbvqjj/lzbb/bbvml",
+        Path {
+            total_size: 699578,
+            dirs: {
+                "//hsswswtq/jdfwmhg/qdtbvqjj/lzbb/bbvml/qdtbvqjj",
+                "//hsswswtq/jdfwmhg/qdtbvqjj/lzbb/bbvml/qssdcrp",
+                "//hsswswtq/jdfwmhg/qdtbvqjj/lzbb/bbvml/tssm",
+            },
+        },
+    ),
+    (
+        "//hsswswtq/jdfwmhg/qdtbvqjj/lzbb/bbvml/qdtbvqjj",
+        Path {
+            total_size: 246275,
+            dirs: {},
+        },
+    ),
+    (
+        "//hsswswtq/jdfwmhg/qdtbvqjj/lzbb/bbvml/qssdcrp",
+        Path {
+            total_size: 274399,
+            dirs: {},
+        },
+    ),
+    (
+        "//hsswswtq/jdfwmhg/qdtbvqjj/lzbb/bbvml/tssm",
+        Path {
+            total_size: 178904,
+            dirs: {
+                "//hsswswtq/jdfwmhg/qdtbvqjj/lzbb/bbvml/tssm/ssqc",
+            },
+        },
+    ),
+    (
+        "//hsswswtq/jdfwmhg/qdtbvqjj/lzbb/bbvml/tssm/ssqc",
+        Path {
+            total_size: 178904,
+            dirs: {},
+        },
+    ),
+    (
+        "//hsswswtq/jdfwmhg/qdtbvqjj/lzbb/fjs",
+        Path {
+            total_size: 1464258,
+            dirs: {
+                "//hsswswtq/jdfwmhg/qdtbvqjj/lzbb/fjs/ssm",
+                "//hsswswtq/jdfwmhg/qdtbvqjj/lzbb/fjs/dmvnp",
+            },
+        },
+    ),
+    (
+        "//hsswswtq/jdfwmhg/qdtbvqjj/lzbb/fjs/dmvnp",
+        Path {
+            total_size: 347370,
+            dirs: {
+                "//hsswswtq/jdfwmhg/qdtbvqjj/lzbb/fjs/dmvnp/zjw",
+                "//hsswswtq/jdfwmhg/qdtbvqjj/lzbb/fjs/dmvnp/psj",
+            },
+        },
+    ),
+    (
+        "//hsswswtq/jdfwmhg/qdtbvqjj/lzbb/fjs/dmvnp/psj",
+        Path {
+            total_size: 267381,
+            dirs: {},
+        },
+    ),
+    (
+        "//hsswswtq/jdfwmhg/qdtbvqjj/lzbb/fjs/dmvnp/zjw",
+        Path {
+            total_size: 79989,
+            dirs: {},
+        },
+    ),
+    (
+        "//hsswswtq/jdfwmhg/qdtbvqjj/lzbb/fjs/ssm",
+        Path {
+            total_size: 218768,
+            dirs: {},
+        },
+    ),
+    (
+        "//hsswswtq/jdfwmhg/qdtbvqjj/lzbb/pffntc",
+        Path {
+            total_size: 111475,
+            dirs: {},
+        },
+    ),
+    (
+        "//hsswswtq/jdfwmhg/qdtbvqjj/lzbb/pnltt",
+        Path {
+            total_size: 490394,
+            dirs: {
+                "//hsswswtq/jdfwmhg/qdtbvqjj/lzbb/pnltt/zngmf",
+                "//hsswswtq/jdfwmhg/qdtbvqjj/lzbb/pnltt/nptfhlf",
+            },
+        },
+    ),
+    (
+        "//hsswswtq/jdfwmhg/qdtbvqjj/lzbb/pnltt/nptfhlf",
+        Path {
+            total_size: 428739,
+            dirs: {},
+        },
+    ),
+    (
+        "//hsswswtq/jdfwmhg/qdtbvqjj/lzbb/pnltt/zngmf",
+        Path {
+            total_size: 61655,
+            dirs: {},
+        },
+    ),
+    (
+        "//hsswswtq/jdfwmhg/qdtbvqjj/lzbb/ptsd",
+        Path {
+            total_size: 632383,
+            dirs: {
+                "//hsswswtq/jdfwmhg/qdtbvqjj/lzbb/ptsd/hrvrt",
+                "//hsswswtq/jdfwmhg/qdtbvqjj/lzbb/ptsd/thwtl",
+            },
+        },
+    ),
+    (
+        "//hsswswtq/jdfwmhg/qdtbvqjj/lzbb/ptsd/hrvrt",
+        Path {
+            total_size: 152296,
+            dirs: {},
+        },
+    ),
+    (
+        "//hsswswtq/jdfwmhg/qdtbvqjj/lzbb/ptsd/thwtl",
+        Path {
+            total_size: 480087,
+            dirs: {},
+        },
+    ),
+    (
+        "//hsswswtq/jdfwmhg/qdtbvqjj/qdtbvqjj",
+        Path {
+            total_size: 320175,
+            dirs: {},
+        },
+    ),
+    (
+        "//hsswswtq/jtgdv",
+        Path {
+            total_size: 81164,
+            dirs: {},
+        },
+    ),
+    (
+        "//hsswswtq/vcbqdj",
+        Path {
+            total_size: 1230212,
+            dirs: {
+                "//hsswswtq/vcbqdj/crng",
+                "//hsswswtq/vcbqdj/vjsbf",
+            },
+        },
+    ),
+    (
+        "//hsswswtq/vcbqdj/crng",
+        Path {
+            total_size: 259458,
+            dirs: {
+                "//hsswswtq/vcbqdj/crng/gznrh",
+            },
+        },
+    ),
+    (
+        "//hsswswtq/vcbqdj/crng/gznrh",
+        Path {
+            total_size: 259458,
+            dirs: {},
+        },
+    ),
+    (
+        "//hsswswtq/vcbqdj/vjsbf",
+        Path {
+            total_size: 194434,
+            dirs: {},
+        },
+    ),
+    (
+        "//hsswswtq/wtrsg",
+        Path {
+            total_size: 144344,
+            dirs: {},
+        },
+    ),
+    (
+        "//jdfwmhg",
+        Path {
+            total_size: 323973,
+            dirs: {},
+        },
+    ),
+    (
+        "//jlcbpsr",
+        Path {
+            total_size: 3737612,
+            dirs: {
+                "//jlcbpsr/pwmvbhsl",
+                "//jlcbpsr/htrdwm",
+                "//jlcbpsr/jdfwmhg",
+                "//jlcbpsr/vwfdfmcp",
+            },
+        },
+    ),
+    (
+        "//jlcbpsr/htrdwm",
+        Path {
+            total_size: 1183376,
+            dirs: {
+                "//jlcbpsr/htrdwm/btn",
+                "//jlcbpsr/htrdwm/jdfwmhg",
+            },
+        },
+    ),
+    (
+        "//jlcbpsr/htrdwm/btn",
+        Path {
+            total_size: 50419,
+            dirs: {},
+        },
+    ),
+    (
+        "//jlcbpsr/htrdwm/jdfwmhg",
+        Path {
+            total_size: 184634,
+            dirs: {
+                "//jlcbpsr/htrdwm/jdfwmhg/bwc",
+            },
+        },
+    ),
+    (
+        "//jlcbpsr/htrdwm/jdfwmhg/bwc",
+        Path {
+            total_size: 184634,
+            dirs: {},
+        },
+    ),
+    (
+        "//jlcbpsr/jdfwmhg",
+        Path {
+            total_size: 1218949,
+            dirs: {
+                "//jlcbpsr/jdfwmhg/jdfwmhg",
+                "//jlcbpsr/jdfwmhg/jhmmt",
+            },
+        },
+    ),
+    (
+        "//jlcbpsr/jdfwmhg/jdfwmhg",
+        Path {
+            total_size: 267171,
+            dirs: {},
+        },
+    ),
+    (
+        "//jlcbpsr/jdfwmhg/jhmmt",
+        Path {
+            total_size: 84473,
+            dirs: {},
+        },
+    ),
+    (
+        "//jlcbpsr/pwmvbhsl",
+        Path {
+            total_size: 1043883,
+            dirs: {
+                "//jlcbpsr/pwmvbhsl/jsg",
+                "//jlcbpsr/pwmvbhsl/vfsqw",
+            },
+        },
+    ),
+    (
+        "//jlcbpsr/pwmvbhsl/jsg",
+        Path {
+            total_size: 614987,
+            dirs: {},
+        },
+    ),
+    (
+        "//jlcbpsr/pwmvbhsl/vfsqw",
+        Path {
+            total_size: 104559,
+            dirs: {},
+        },
+    ),
+    (
+        "//jlcbpsr/vwfdfmcp",
+        Path {
+            total_size: 291404,
+            dirs: {},
+        },
+    ),
+    (
+        "//tvcr",
+        Path {
+            total_size: 3337555,
+            dirs: {
+                "//tvcr/ndshbjzn",
+                "//tvcr/tssm",
+                "//tvcr/hsswswtq",
+                "//tvcr/djtwv",
+                "//tvcr/zqdrdzv",
+            },
+        },
+    ),
+    (
+        "//tvcr/djtwv",
+        Path {
+            total_size: 271696,
+            dirs: {},
+        },
+    ),
+    (
+        "//tvcr/hsswswtq",
+        Path {
+            total_size: 1432582,
+            dirs: {
+                "//tvcr/hsswswtq/djngm",
+                "//tvcr/hsswswtq/hcz",
+                "//tvcr/hsswswtq/ptsd",
+            },
+        },
+    ),
+    (
+        "//tvcr/hsswswtq/djngm",
+        Path {
+            total_size: 355551,
+            dirs: {},
+        },
+    ),
+    (
+        "//tvcr/hsswswtq/hcz",
+        Path {
+            total_size: 652747,
+            dirs: {},
+        },
+    ),
+    (
+        "//tvcr/hsswswtq/ptsd",
+        Path {
+            total_size: 424284,
+            dirs: {},
+        },
+    ),
+    (
+        "//tvcr/ndshbjzn",
+        Path {
+            total_size: 206408,
+            dirs: {},
+        },
+    ),
+    (
+        "//tvcr/tssm",
+        Path {
+            total_size: 1016789,
+            dirs: {
+                "//tvcr/tssm/nbgjm",
+                "//tvcr/tssm/sfnlb",
+                "//tvcr/tssm/mlcnsf",
+            },
+        },
+    ),
+    (
+        "//tvcr/tssm/mlcnsf",
+        Path {
+            total_size: 279014,
+            dirs: {},
+        },
+    ),
+    (
+        "//tvcr/tssm/nbgjm",
+        Path {
+            total_size: 113314,
+            dirs: {},
+        },
+    ),
+    (
+        "//tvcr/tssm/sfnlb",
+        Path {
+            total_size: 234917,
+            dirs: {},
+        },
+    ),
+    (
+        "//tvcr/zqdrdzv",
+        Path {
+            total_size: 40790,
+            dirs: {},
+        },
+    ),
+    (
+        "//vhjbjr",
+        Path {
+            total_size: 0,
+            dirs: {
+                "//vhjbjr/mvns",
+                "//vhjbjr/glv",
+                "//vhjbjr/qbrnh",
+            },
+        },
+    ),
+    (
+        "//vhjbjr/glv",
+        Path {
+            total_size: 547954,
+            dirs: {
+                "//vhjbjr/glv/qcjlshcv",
+            },
+        },
+    ),
+    (
+        "//vhjbjr/glv/qcjlshcv",
+        Path {
+            total_size: 0,
+            dirs: {
+                "//vhjbjr/glv/qcjlshcv/nwqqjcmh",
+            },
+        },
+    ),
+    (
+        "//vhjbjr/glv/qcjlshcv/nwqqjcmh",
+        Path {
+            total_size: 450148,
+            dirs: {
+                "//vhjbjr/glv/qcjlshcv/nwqqjcmh/qdtbvqjj",
+            },
+        },
+    ),
+    (
+        "//vhjbjr/glv/qcjlshcv/nwqqjcmh/qdtbvqjj",
+        Path {
+            total_size: 307636,
+            dirs: {
+                "//vhjbjr/glv/qcjlshcv/nwqqjcmh/qdtbvqjj/nlqbq",
+            },
+        },
+    ),
+    (
+        "//vhjbjr/glv/qcjlshcv/nwqqjcmh/qdtbvqjj/nlqbq",
+        Path {
+            total_size: 307636,
+            dirs: {},
+        },
+    ),
+    (
+        "//vhjbjr/mvns",
+        Path {
+            total_size: 748937,
+            dirs: {
+                "//vhjbjr/mvns/gzqlmrdh",
+                "//vhjbjr/mvns/qjhtlh",
+                "//vhjbjr/mvns/tssm",
+                "//vhjbjr/mvns/vthg",
+            },
+        },
+    ),
+    (
+        "//vhjbjr/mvns/gzqlmrdh",
+        Path {
+            total_size: 274950,
+            dirs: {},
+        },
+    ),
+    (
+        "//vhjbjr/mvns/qjhtlh",
+        Path {
+            total_size: 458215,
+            dirs: {},
+        },
+    ),
+    (
+        "//vhjbjr/mvns/tssm",
+        Path {
+            total_size: 15772,
+            dirs: {},
+        },
+    ),
+    (
+        "//vhjbjr/mvns/vthg",
+        Path {
+            total_size: 0,
+            dirs: {
+                "//vhjbjr/mvns/vthg/gdndtlnc",
+            },
+        },
+    ),
+    (
+        "//vhjbjr/mvns/vthg/gdndtlnc",
+        Path {
+            total_size: 1020609,
+            dirs: {
+                "//vhjbjr/mvns/vthg/gdndtlnc/qdtbvqjj",
+            },
+        },
+    ),
+    (
+        "//vhjbjr/mvns/vthg/gdndtlnc/qdtbvqjj",
+        Path {
+            total_size: 236889,
+            dirs: {},
+        },
+    ),
+    (
+        "//vhjbjr/qbrnh",
+        Path {
+            total_size: 2261208,
+            dirs: {
+                "//vhjbjr/qbrnh/wnbfzd",
+                "//vhjbjr/qbrnh/zttlggt",
+                "//vhjbjr/qbrnh/hsswswtq",
+                "//vhjbjr/qbrnh/zjzhncs",
+            },
+        },
+    ),
+    (
+        "//vhjbjr/qbrnh/hsswswtq",
+        Path {
+            total_size: 48277,
+            dirs: {},
+        },
+    ),
+    (
+        "//vhjbjr/qbrnh/wnbfzd",
+        Path {
+            total_size: 97133,
+            dirs: {},
+        },
+    ),
+    (
+        "//vhjbjr/qbrnh/zjzhncs",
+        Path {
+            total_size: 656385,
+            dirs: {
+                "//vhjbjr/qbrnh/zjzhncs/ggr",
+            },
+        },
+    ),
+    (
+        "//vhjbjr/qbrnh/zjzhncs/ggr",
+        Path {
+            total_size: 244876,
+            dirs: {},
+        },
+    ),
+    (
+        "//vhjbjr/qbrnh/zttlggt",
+        Path {
+            total_size: 892484,
+            dirs: {
+                "//vhjbjr/qbrnh/zttlggt/mbvpd",
+                "//vhjbjr/qbrnh/zttlggt/hdbwrcm",
+                "//vhjbjr/qbrnh/zttlggt/tcwqp",
+                "//vhjbjr/qbrnh/zttlggt/ptsd",
+                "//vhjbjr/qbrnh/zttlggt/mtd",
+            },
+        },
+    ),
+    (
+        "//vhjbjr/qbrnh/zttlggt/hdbwrcm",
+        Path {
+            total_size: 267323,
+            dirs: {},
+        },
+    ),
+    (
+        "//vhjbjr/qbrnh/zttlggt/mbvpd",
+        Path {
+            total_size: 84087,
+            dirs: {},
+        },
+    ),
+    (
+        "//vhjbjr/qbrnh/zttlggt/mtd",
+        Path {
+            total_size: 158543,
+            dirs: {},
+        },
+    ),
+    (
+        "//vhjbjr/qbrnh/zttlggt/ptsd",
+        Path {
+            total_size: 112797,
+            dirs: {},
+        },
+    ),
+    (
+        "//vhjbjr/qbrnh/zttlggt/tcwqp",
+        Path {
+            total_size: 269734,
+            dirs: {},
+        },
+    ),
+    (
+        "//vvsg",
+        Path {
+            total_size: 343959,
+            dirs: {
+                "//vvsg/bwv",
+                "//vvsg/zwvlhs",
+                "//vvsg/lqmnjrlb",
+                "//vvsg/mmrfrj",
+                "//vvsg/hsswswtq",
+            },
+        },
+    ),
+    (
+        "//vvsg/bwv",
+        Path {
+            total_size: 2500767,
+            dirs: {
+                "//vvsg/bwv/mfdvcn",
+                "//vvsg/bwv/gwdh",
+                "//vvsg/bwv/ptsd",
+            },
+        },
+    ),
+    (
+        "//vvsg/bwv/gwdh",
+        Path {
+            total_size: 306377,
+            dirs: {},
+        },
+    ),
+    (
+        "//vvsg/bwv/mfdvcn",
+        Path {
+            total_size: 588141,
+            dirs: {
+                "//vvsg/bwv/mfdvcn/hsswswtq",
+            },
+        },
+    ),
+    (
+        "//vvsg/bwv/mfdvcn/hsswswtq",
+        Path {
+            total_size: 298155,
+            dirs: {},
+        },
+    ),
+    (
+        "//vvsg/bwv/ptsd",
+        Path {
+            total_size: 1134430,
+            dirs: {
+                "//vvsg/bwv/ptsd/vgjfsh",
+                "//vvsg/bwv/ptsd/tssm",
+            },
+        },
+    ),
+    (
+        "//vvsg/bwv/ptsd/tssm",
+        Path {
+            total_size: 379114,
+            dirs: {
+                "//vvsg/bwv/ptsd/tssm/dndv",
+            },
+        },
+    ),
+    (
+        "//vvsg/bwv/ptsd/tssm/dndv",
+        Path {
+            total_size: 152739,
+            dirs: {},
+        },
+    ),
+    (
+        "//vvsg/bwv/ptsd/vgjfsh",
+        Path {
+            total_size: 382288,
+            dirs: {},
+        },
+    ),
+    (
+        "//vvsg/hsswswtq",
+        Path {
+            total_size: 318466,
+            dirs: {
+                "//vvsg/hsswswtq/qdtbvqjj",
+                "//vvsg/hsswswtq/tssm",
+            },
+        },
+    ),
+    (
+        "//vvsg/hsswswtq/qdtbvqjj",
+        Path {
+            total_size: 118588,
+            dirs: {},
+        },
+    ),
+    (
+        "//vvsg/hsswswtq/tssm",
+        Path {
+            total_size: 113460,
+            dirs: {},
+        },
+    ),
+    (
+        "//vvsg/lqmnjrlb",
+        Path {
+            total_size: 0,
+            dirs: {
+                "//vvsg/lqmnjrlb/tssm",
+            },
+        },
+    ),
+    (
+        "//vvsg/lqmnjrlb/tssm",
+        Path {
+            total_size: 64663,
+            dirs: {
+                "//vvsg/lqmnjrlb/tssm/jdfwmhg",
+            },
+        },
+    ),
+    (
+        "//vvsg/lqmnjrlb/tssm/jdfwmhg",
+        Path {
+            total_size: 64663,
+            dirs: {},
+        },
+    ),
+    (
+        "//vvsg/mmrfrj",
+        Path {
+            total_size: 3540691,
+            dirs: {
+                "//vvsg/mmrfrj/pfr",
+                "//vvsg/mmrfrj/wcmwrtjn",
+                "//vvsg/mmrfrj/jdfwmhg",
+                "//vvsg/mmrfrj/tssm",
+                "//vvsg/mmrfrj/prnnpwcd",
+            },
+        },
+    ),
+    (
+        "//vvsg/mmrfrj/jdfwmhg",
+        Path {
+            total_size: 140910,
+            dirs: {},
+        },
+    ),
+    (
+        "//vvsg/mmrfrj/pfr",
+        Path {
+            total_size: 507040,
+            dirs: {},
+        },
+    ),
+    (
+        "//vvsg/mmrfrj/prnnpwcd",
+        Path {
+            total_size: 0,
+            dirs: {
+                "//vvsg/mmrfrj/prnnpwcd/qdtbvqjj",
+            },
+        },
+    ),
+    (
+        "//vvsg/mmrfrj/prnnpwcd/qdtbvqjj",
+        Path {
+            total_size: 649733,
+            dirs: {
+                "//vvsg/mmrfrj/prnnpwcd/qdtbvqjj/tssm",
+                "//vvsg/mmrfrj/prnnpwcd/qdtbvqjj/pqg",
+            },
+        },
+    ),
+    (
+        "//vvsg/mmrfrj/prnnpwcd/qdtbvqjj/pqg",
+        Path {
+            total_size: 222392,
+            dirs: {},
+        },
+    ),
+    (
+        "//vvsg/mmrfrj/prnnpwcd/qdtbvqjj/tssm",
+        Path {
+            total_size: 427341,
+            dirs: {},
+        },
+    ),
+    (
+        "//vvsg/mmrfrj/tssm",
+        Path {
+            total_size: 209424,
+            dirs: {
+                "//vvsg/mmrfrj/tssm/ptsd",
+            },
+        },
+    ),
+    (
+        "//vvsg/mmrfrj/tssm/ptsd",
+        Path {
+            total_size: 209424,
+            dirs: {},
+        },
+    ),
+    (
+        "//vvsg/mmrfrj/wcmwrtjn",
+        Path {
+            total_size: 1893320,
+            dirs: {
+                "//vvsg/mmrfrj/wcmwrtjn/nbdbzsn",
+                "//vvsg/mmrfrj/wcmwrtjn/ptsd",
+                "//vvsg/mmrfrj/wcmwrtjn/mlm",
+            },
+        },
+    ),
+    (
+        "//vvsg/mmrfrj/wcmwrtjn/mlm",
+        Path {
+            total_size: 0,
+            dirs: {
+                "//vvsg/mmrfrj/wcmwrtjn/mlm/gqwhhmvd",
+                "//vvsg/mmrfrj/wcmwrtjn/mlm/nrzvzgrt",
+                "//vvsg/mmrfrj/wcmwrtjn/mlm/zzp",
+                "//vvsg/mmrfrj/wcmwrtjn/mlm/nzplht",
+            },
+        },
+    ),
+    (
+        "//vvsg/mmrfrj/wcmwrtjn/mlm/gqwhhmvd",
+        Path {
+            total_size: 556434,
+            dirs: {
+                "//vvsg/mmrfrj/wcmwrtjn/mlm/gqwhhmvd/ddmvjpj",
+                "//vvsg/mmrfrj/wcmwrtjn/mlm/gqwhhmvd/jdfwmhg",
+            },
+        },
+    ),
+    (
+        "//vvsg/mmrfrj/wcmwrtjn/mlm/gqwhhmvd/ddmvjpj",
+        Path {
+            total_size: 317028,
+            dirs: {},
+        },
+    ),
+    (
+        "//vvsg/mmrfrj/wcmwrtjn/mlm/gqwhhmvd/jdfwmhg",
+        Path {
+            total_size: 239406,
+            dirs: {},
+        },
+    ),
+    (
+        "//vvsg/mmrfrj/wcmwrtjn/mlm/nrzvzgrt",
+        Path {
+            total_size: 3495678,
+            dirs: {
+                "//vvsg/mmrfrj/wcmwrtjn/mlm/nrzvzgrt/hdzhl",
+                "//vvsg/mmrfrj/wcmwrtjn/mlm/nrzvzgrt/jfzr",
+                "//vvsg/mmrfrj/wcmwrtjn/mlm/nrzvzgrt/tssm",
+                "//vvsg/mmrfrj/wcmwrtjn/mlm/nrzvzgrt/wdlsvzvl",
+            },
+        },
+    ),
+    (
+        "//vvsg/mmrfrj/wcmwrtjn/mlm/nrzvzgrt/hdzhl",
+        Path {
+            total_size: 922431,
+            dirs: {
+                "//vvsg/mmrfrj/wcmwrtjn/mlm/nrzvzgrt/hdzhl/gfwbd",
+            },
+        },
+    ),
+    (
+        "//vvsg/mmrfrj/wcmwrtjn/mlm/nrzvzgrt/hdzhl/gfwbd",
+        Path {
+            total_size: 556281,
+            dirs: {},
+        },
+    ),
+    (
+        "//vvsg/mmrfrj/wcmwrtjn/mlm/nrzvzgrt/jfzr",
+        Path {
+            total_size: 1135783,
+            dirs: {
+                "//vvsg/mmrfrj/wcmwrtjn/mlm/nrzvzgrt/jfzr/dvvflnnw",
+                "//vvsg/mmrfrj/wcmwrtjn/mlm/nrzvzgrt/jfzr/jdfwmhg",
+            },
+        },
+    ),
+    (
+        "//vvsg/mmrfrj/wcmwrtjn/mlm/nrzvzgrt/jfzr/dvvflnnw",
+        Path {
+            total_size: 52441,
+            dirs: {},
+        },
+    ),
+    (
+        "//vvsg/mmrfrj/wcmwrtjn/mlm/nrzvzgrt/jfzr/jdfwmhg",
+        Path {
+            total_size: 551581,
+            dirs: {},
+        },
+    ),
+    (
+        "//vvsg/mmrfrj/wcmwrtjn/mlm/nrzvzgrt/tssm",
+        Path {
+            total_size: 393671,
+            dirs: {},
+        },
+    ),
+    (
+        "//vvsg/mmrfrj/wcmwrtjn/mlm/nrzvzgrt/wdlsvzvl",
+        Path {
+            total_size: 142213,
+            dirs: {},
+        },
+    ),
+    (
+        "//vvsg/mmrfrj/wcmwrtjn/mlm/nzplht",
+        Path {
+            total_size: 849570,
+            dirs: {
+                "//vvsg/mmrfrj/wcmwrtjn/mlm/nzplht/qbjqgg",
+            },
+        },
+    ),
+    (
+        "//vvsg/mmrfrj/wcmwrtjn/mlm/nzplht/qbjqgg",
+        Path {
+            total_size: 331934,
+            dirs: {},
+        },
+    ),
+    (
+        "//vvsg/mmrfrj/wcmwrtjn/mlm/zzp",
+        Path {
+            total_size: 452315,
+            dirs: {
+                "//vvsg/mmrfrj/wcmwrtjn/mlm/zzp/gwlhqlp",
+            },
+        },
+    ),
+    (
+        "//vvsg/mmrfrj/wcmwrtjn/mlm/zzp/gwlhqlp",
+        Path {
+            total_size: 201894,
+            dirs: {},
+        },
+    ),
+    (
+        "//vvsg/mmrfrj/wcmwrtjn/nbdbzsn",
+        Path {
+            total_size: 169929,
+            dirs: {},
+        },
+    ),
+    (
+        "//vvsg/mmrfrj/wcmwrtjn/ptsd",
+        Path {
+            total_size: 3430524,
+            dirs: {
+                "//vvsg/mmrfrj/wcmwrtjn/ptsd/jtlrn",
+                "//vvsg/mmrfrj/wcmwrtjn/ptsd/pszlt",
+                "//vvsg/mmrfrj/wcmwrtjn/ptsd/rpb",
+                "//vvsg/mmrfrj/wcmwrtjn/ptsd/tssm",
+                "//vvsg/mmrfrj/wcmwrtjn/ptsd/ptjnh",
+                "//vvsg/mmrfrj/wcmwrtjn/ptsd/tmddnh",
+                "//vvsg/mmrfrj/wcmwrtjn/ptsd/ptsd",
+                "//vvsg/mmrfrj/wcmwrtjn/ptsd/tcjgpqj",
+            },
+        },
+    ),
+    (
+        "//vvsg/mmrfrj/wcmwrtjn/ptsd/jtlrn",
+        Path {
+            total_size: 154934,
+            dirs: {},
+        },
+    ),
+    (
+        "//vvsg/mmrfrj/wcmwrtjn/ptsd/pszlt",
+        Path {
+            total_size: 154368,
+            dirs: {},
+        },
+    ),
+    (
+        "//vvsg/mmrfrj/wcmwrtjn/ptsd/ptjnh",
+        Path {
+            total_size: 389814,
+            dirs: {},
+        },
+    ),
+    (
+        "//vvsg/mmrfrj/wcmwrtjn/ptsd/ptsd",
+        Path {
+            total_size: 1060923,
+            dirs: {
+                "//vvsg/mmrfrj/wcmwrtjn/ptsd/ptsd/ftjhsb",
+                "//vvsg/mmrfrj/wcmwrtjn/ptsd/ptsd/jdfwmhg",
+            },
+        },
+    ),
+    (
+        "//vvsg/mmrfrj/wcmwrtjn/ptsd/ptsd/ftjhsb",
+        Path {
+            total_size: 56965,
+            dirs: {},
+        },
+    ),
+    (
+        "//vvsg/mmrfrj/wcmwrtjn/ptsd/ptsd/jdfwmhg",
+        Path {
+            total_size: 602975,
+            dirs: {
+                "//vvsg/mmrfrj/wcmwrtjn/ptsd/ptsd/jdfwmhg/vmwshd",
+                "//vvsg/mmrfrj/wcmwrtjn/ptsd/ptsd/jdfwmhg/lssbmtms",
+            },
+        },
+    ),
+    (
+        "//vvsg/mmrfrj/wcmwrtjn/ptsd/ptsd/jdfwmhg/lssbmtms",
+        Path {
+            total_size: 335888,
+            dirs: {},
+        },
+    ),
+    (
+        "//vvsg/mmrfrj/wcmwrtjn/ptsd/ptsd/jdfwmhg/vmwshd",
+        Path {
+            total_size: 267087,
+            dirs: {},
+        },
+    ),
+    (
+        "//vvsg/mmrfrj/wcmwrtjn/ptsd/rpb",
+        Path {
+            total_size: 236249,
+            dirs: {
+                "//vvsg/mmrfrj/wcmwrtjn/ptsd/rpb/ptsd",
+                "//vvsg/mmrfrj/wcmwrtjn/ptsd/rpb/lqbchlbp",
+            },
+        },
+    ),
+    (
+        "//vvsg/mmrfrj/wcmwrtjn/ptsd/rpb/lqbchlbp",
+        Path {
+            total_size: 151429,
+            dirs: {},
+        },
+    ),
+    (
+        "//vvsg/mmrfrj/wcmwrtjn/ptsd/rpb/ptsd",
+        Path {
+            total_size: 84820,
+            dirs: {},
+        },
+    ),
+    (
+        "//vvsg/mmrfrj/wcmwrtjn/ptsd/tcjgpqj",
+        Path {
+            total_size: 865638,
+            dirs: {
+                "//vvsg/mmrfrj/wcmwrtjn/ptsd/tcjgpqj/cvdlcvq",
+            },
+        },
+    ),
+    (
+        "//vvsg/mmrfrj/wcmwrtjn/ptsd/tcjgpqj/cvdlcvq",
+        Path {
+            total_size: 64738,
+            dirs: {},
+        },
+    ),
+    (
+        "//vvsg/mmrfrj/wcmwrtjn/ptsd/tmddnh",
+        Path {
+            total_size: 238434,
+            dirs: {},
+        },
+    ),
+    (
+        "//vvsg/mmrfrj/wcmwrtjn/ptsd/tssm",
+        Path {
+            total_size: 198184,
+            dirs: {
+                "//vvsg/mmrfrj/wcmwrtjn/ptsd/tssm/tlllv",
+            },
+        },
+    ),
+    (
+        "//vvsg/mmrfrj/wcmwrtjn/ptsd/tssm/tlllv",
+        Path {
+            total_size: 198184,
+            dirs: {},
+        },
+    ),
+    (
+        "//vvsg/zwvlhs",
+        Path {
+            total_size: 686333,
+            dirs: {
+                "//vvsg/zwvlhs/srjlz",
+            },
+        },
+    ),
+    (
+        "//vvsg/zwvlhs/srjlz",
+        Path {
+            total_size: 221301,
+            dirs: {},
+        },
+    ),
+]
+ans (part i) is: 1142162
+ans1 is 0; time elapsed: 41.615416ms
+ans2 is 0
+ans2 is 0; time elapsed: 911.791µs
