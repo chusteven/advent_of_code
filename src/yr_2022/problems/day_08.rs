@@ -2,6 +2,7 @@ use std::cmp::Ordering;
 
 use crate::yr_2022::problems::utils;
 
+#[allow(dead_code)]
 pub fn solution_2(filepath: &str) -> i32 {
     let lines: Vec<Vec<i32>> = utils::read_file(filepath)
         .unwrap()
@@ -101,6 +102,7 @@ fn get_scenic_score(i: i32, j: i32, lines: &Vec<Vec<i32>>) -> i32 {
     ans
 }
 
+#[allow(dead_code)]
 pub fn solution_1(filepath: &str) -> i32 {
     let lines: Vec<Vec<i32>> = utils::read_file(filepath)
         .unwrap()
