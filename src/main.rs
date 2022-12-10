@@ -38,6 +38,6 @@ fn main() {
         "07",
         yr_2022::problems::day_07::solution_1,
         yr_2022::problems::day_07::solution_2,
-        true,
+        false,
     );
 }

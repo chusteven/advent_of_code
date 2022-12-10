@@ -1,5 +1,6 @@
 use crate::yr_2022::problems::utils;
 
+#[allow(dead_code)]
 pub fn solution_2(input_file: &str) -> i32 {
     let lines = utils::read_file(input_file).unwrap();
 
@@ -12,7 +13,7 @@ pub fn solution_2(input_file: &str) -> i32 {
 
     let mut x = 1;
     let mut cur_cycle = 0;
-    for (i, line) in lines.iter().enumerate() {
+    for (_i, line) in lines.iter().enumerate() {
         if line.starts_with("noop") {
             maybe_draw_lit(&mut drawing, cur_cycle / 40, cur_cycle % 40, x);
             cur_cycle += 1;
@@ -31,7 +32,7 @@ pub fn solution_2(input_file: &str) -> i32 {
         for x in r {
             print!("{x}");
         }
-        println!("");
+        println!();
     }
     0
 }
@@ -48,7 +49,7 @@ pub fn solution_1(input_file: &str) -> i32 {
     let mut x = 1;
     let mut ans = 0;
     let mut cur_cycle = 0;
-    for (i, line) in lines.iter().enumerate() {
+    for (_i, line) in lines.iter().enumerate() {
         if line.starts_with("noop") {
             cur_cycle += 1;
             if cur_cycle == 20 || (cur_cycle >= 60 && ((cur_cycle - 20) % 40 == 0)) {

@@ -1,4 +1,3 @@
-use std::cell::RefCell;
 use std::collections::hash_map::Entry::{Occupied, Vacant};
 use std::collections::{HashMap, HashSet};
 
@@ -9,8 +8,7 @@ pub fn solution_2(filepath: &str) -> i32 {
     let mut is_listing: bool = false;
     let cur_dir = &mut String::new();
     let mut dirs: Vec<String> = vec![];
-    let mut filesystem: HashMap<String, RefCell<Path>> = HashMap::new();
-    let mut child_to_parent: HashMap<String, String> = HashMap::new();
+    let mut filesystem: HashMap<String, Path> = HashMap::new();
     let mut parent_to_child: HashMap<String, String> = HashMap::new();
 
     for (_i, line) in lines.iter().enumerate() {
@@ -22,7 +20,6 @@ pub fn solution_2(filepath: &str) -> i32 {
                     dirs.pop();
                 } else {
                     dirs.push(nav_path.to_string());
-                    child_to_parent.insert(dirs.join("/"), cur_dir.to_string());
                     parent_to_child.insert(cur_dir.to_string(), dirs.join("/"));
                 }
                 *cur_dir = dirs.join("/");
@@ -47,13 +44,13 @@ pub fn solution_2(filepath: &str) -> i32 {
                     Vacant(e) => {
                         let mut set = HashSet::new();
                         set.insert(dir);
-                        e.insert(RefCell::new(Path {
+                        e.insert(Path {
                             total_size: 0,
                             dirs: set,
-                        }));
+                        });
                     }
                     Occupied(mut e) => {
-                        let mut p = e.get_mut().borrow_mut();
+                        let p = e.get_mut();
                         let tmp_dirs = &mut p.dirs;
                         tmp_dirs.insert(dir);
                     }
@@ -63,27 +60,23 @@ pub fn solution_2(filepath: &str) -> i32 {
                 let size = first.trim().to_string().parse::<i32>().unwrap();
                 match filesystem.entry(cur_dir.to_string()) {
                     Vacant(e) => {
-                        e.insert(RefCell::new(Path {
+                        e.insert(Path {
                             total_size: size,
                             dirs: HashSet::new(),
-                        }));
+                        });
                     }
                     Occupied(mut e) => {
-                        let mut p = e.get_mut().borrow_mut();
+                        let mut p = e.get_mut();
                         p.total_size += size;
                     }
                 }
             }
         }
     }
+    recurse("/", &mut filesystem, &parent_to_child);
     let cur_dir = "/";
-    recurse(cur_dir, &filesystem, &parent_to_child);
-    let mut items = filesystem
-        .iter()
-        .map(|(k, v)| (k.to_string(), v.borrow().total_size))
-        .collect::<Vec<(String, i32)>>();
-    items.sort_by(|a, b| b.1.cmp(&a.1)); // Reverse
-    println!("{:?}", items);
+    let total_size = filesystem.get(cur_dir).unwrap().total_size;
+
     0
 }
 
@@ -110,8 +103,7 @@ pub fn solution_1(filepath: &str) -> i32 {
     let mut is_listing: bool = false;
     let cur_dir = &mut String::new();
     let mut dirs: Vec<String> = vec![];
-    let mut filesystem: HashMap<String, RefCell<Path>> = HashMap::new();
-    let mut child_to_parent: HashMap<String, String> = HashMap::new();
+    let mut filesystem: HashMap<String, Path> = HashMap::new();
     let mut parent_to_child: HashMap<String, String> = HashMap::new();
 
     for (_i, line) in lines.iter().enumerate() {
@@ -123,7 +115,6 @@ pub fn solution_1(filepath: &str) -> i32 {
                     dirs.pop();
                 } else {
                     dirs.push(nav_path.to_string());
-                    child_to_parent.insert(dirs.join("/"), cur_dir.to_string());
                     parent_to_child.insert(cur_dir.to_string(), dirs.join("/"));
                 }
                 *cur_dir = dirs.join("/");
@@ -148,13 +139,13 @@ pub fn solution_1(filepath: &str) -> i32 {
                     Vacant(e) => {
                         let mut set = HashSet::new();
                         set.insert(dir);
-                        e.insert(RefCell::new(Path {
+                        e.insert(Path {
                             total_size: 0,
                             dirs: set,
-                        }));
+                        });
                     }
                     Occupied(mut e) => {
-                        let mut p = e.get_mut().borrow_mut();
+                        let p = e.get_mut();
                         let tmp_dirs = &mut p.dirs;
                         tmp_dirs.insert(dir);
                     }
@@ -164,111 +155,43 @@ pub fn solution_1(filepath: &str) -> i32 {
                 let size = first.trim().to_string().parse::<i32>().unwrap();
                 match filesystem.entry(cur_dir.to_string()) {
                     Vacant(e) => {
-                        e.insert(RefCell::new(Path {
+                        e.insert(Path {
                             total_size: size,
                             dirs: HashSet::new(),
-                        }));
+                        });
                     }
                     Occupied(mut e) => {
-                        let mut p = e.get_mut().borrow_mut();
+                        let mut p = e.get_mut();
                         p.total_size += size;
                     }
                 }
             }
         }
     }
-    let cur_dir = "/";
-    recurse(cur_dir, &filesystem, &parent_to_child);
+    recurse("/", &mut filesystem, &parent_to_child);
     filesystem
         .iter()
         .map(|(_, v)| v)
-        .map(|v| {
-            let path = v.borrow();
-            path.total_size
-        })
+        .map(|v| v.total_size)
         .filter(|s| s <= &100_000)
         .sum()
 }
 
+#[allow(clippy::only_used_in_recursion)] // Very confused about this lint
 fn recurse(
     cur_dir: &str,
-    filesystem: &HashMap<String, RefCell<Path>>,
+    filesystem: &mut HashMap<String, Path>,
     parent_to_child: &HashMap<String, String>,
 ) -> i32 {
-    let tmp = filesystem.get(cur_dir).unwrap().clone();
-    let dir = tmp.borrow();
-    if dir.dirs.is_empty() {
-        return dir.total_size;
+    let tmp = filesystem.get(cur_dir).unwrap().clone(); // Sigh
+    if tmp.dirs.is_empty() {
+        return tmp.total_size;
     }
     let mut size = 0;
-    for child in &dir.dirs {
-        size += recurse(&child, &filesystem, parent_to_child);
+    for child in &tmp.dirs {
+        size += recurse(child, filesystem, parent_to_child);
     }
-    let mut dir = filesystem.get(cur_dir).unwrap().borrow_mut();
+    let mut dir = filesystem.get_mut(cur_dir).unwrap();
     dir.total_size += size;
     dir.total_size
-}
-
-///
-/// While loop
-/// Inside each iteration,
-/// Investigate one level deeper
-/// Add up the total size of all those
-/// To its own total_size
-/// Then set to parents
-/// Do it until get to "/"
-///
-fn update_filesystem_bottoms_up(
-    mut filesystem: HashMap<String, Path>,
-    mut dirs_to_update: Vec<String>,
-    child_to_parent: HashMap<String, String>,
-) {
-    let mut seen = HashSet::new();
-    let filesystem = &mut filesystem;
-    let dirs_to_update = &mut dirs_to_update;
-    dirs_to_update.iter().for_each(|d| {
-        seen.insert(d.to_string());
-    });
-    loop {
-        let mut new_dirs_to_update = HashSet::new();
-        for dir in &*dirs_to_update {
-            let dir = &dir[..];
-            if let Some(parent) = child_to_parent.get(dir) {
-                let child_size = filesystem.get(dir).unwrap().total_size;
-                let parent_path = filesystem.get(parent).unwrap().clone(); // Omg...
-                for d in parent_path.dirs {
-                    if seen.contains(&d) {
-                        continue;
-                    }
-                    seen.insert(d.to_string());
-                    new_dirs_to_update.insert(d);
-                }
-                let mut tmp = filesystem.clone();
-                tmp.get_mut(parent).unwrap().total_size += child_size;
-                *filesystem = tmp;
-            }
-        }
-        *dirs_to_update = new_dirs_to_update
-            .iter()
-            .map(|s| (*s).to_string())
-            .collect::<Vec<String>>();
-        if dirs_to_update.is_empty() {
-            break;
-        }
-    }
-
-    // For debugging
-    let mut sorted = vec![];
-    for (k, v) in filesystem.iter() {
-        sorted.push((k, v));
-    }
-    sorted.sort_by(|(a, _), (b, _)| a.cmp(b));
-    println!("{:#?}", sorted);
-
-    let ans = filesystem
-        .iter()
-        .map(|(_, v)| v.total_size)
-        .filter(|v| *v <= 100_000)
-        .sum::<i32>();
-    println!("ans (part i) is: {ans}");
 }
