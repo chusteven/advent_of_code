@@ -38,7 +38,6 @@ pub fn solution_2(filepath: &str) -> i32 {
                 let raw_dir = parts[1].trim();
                 let mut dirs_clone = dirs.clone();
                 dirs_clone.push(raw_dir.to_string());
-                // FIXME: It only contains the directories seen so far
                 let dir = dirs_clone.join("/");
                 match filesystem.entry(cur_dir.to_string()) {
                     Vacant(e) => {
@@ -77,7 +76,22 @@ pub fn solution_2(filepath: &str) -> i32 {
     let cur_dir = "/";
     let total_size = filesystem.get(cur_dir).unwrap().total_size;
 
-    0
+    let unused = 70_000_000 - total_size;
+    let needed = 30_000_000 - unused;
+    let mut sizes = filesystem
+        .iter()
+        .map(|(_, v)| v.total_size)
+        .collect::<Vec<i32>>();
+    sizes.sort_by(|a, b| b.cmp(&a));
+    let mut ans = sizes[0];
+    sizes.iter().for_each(|x| {
+        if *x > needed {
+            if *x < ans {
+                ans = *x;
+            }
+        }
+    });
+    ans
 }
 
 ///
@@ -133,7 +147,6 @@ pub fn solution_1(filepath: &str) -> i32 {
                 let raw_dir = parts[1].trim();
                 let mut dirs_clone = dirs.clone();
                 dirs_clone.push(raw_dir.to_string());
-                // FIXME: It only contains the directories seen so far
                 let dir = dirs_clone.join("/");
                 match filesystem.entry(cur_dir.to_string()) {
                     Vacant(e) => {
