@@ -6,6 +6,7 @@ use crate::yr_2022::problems::utils;
 ///
 /// Ohh... I don't know about this one.
 ///
+#[allow(dead_code)]
 pub fn solution_2(filepath: &str) -> i32 {
     let k = 9;
     let lines = utils::read_file(filepath).unwrap();
@@ -120,49 +121,6 @@ fn follow_the_head_long_tail(
     }
 }
 
-fn _ref_follow_the_head(
-    cur_h: &mut (i32, i32),
-    cur_t: &mut (i32, i32),
-    diff: &(i32, i32),
-    seen: &mut HashSet<(i32, i32)>,
-) {
-    *cur_h = (cur_h.0 + diff.0, cur_h.1 + diff.1);
-    let _dx = (cur_h.0 - cur_t.0).abs();
-    let _dy = (cur_h.1 - cur_t.1).abs();
-
-    let dx: i32;
-    let dy: i32;
-    if (cur_t == cur_h)
-        || (_dx == 1 && _dy == 1)
-        || (_dx == 0 && _dy == 1)
-        || (_dx == 1 && _dy == 0)
-    {
-        dx = 0;
-        dy = 0;
-    } else if cur_h.0 == cur_t.0 || cur_h.1 == cur_t.1 {
-        dx = diff.0;
-        dy = diff.1;
-    } else {
-        match diff {
-            // If head went up, then get dx, move that direction and also up
-            // If head went down, then get dx, move that direction and also down
-            (0, 1) | (0, -1) => {
-                dx = cur_h.0 - cur_t.0;
-                dy = diff.1;
-            }
-            // If head went right, then get dy, move that direction and also right
-            // If head went left, then get dx, move that direction and also left
-            (1, 0) | (-1, 0) => {
-                dx = diff.0;
-                dy = cur_h.1 - cur_t.1;
-            }
-            _ => panic!("This shouldn't have happened o.O"),
-        }
-    }
-    *cur_t = (cur_t.0 + dx, cur_t.1 + dy);
-    seen.insert(*cur_t);
-}
-
 ///
 /// Let's start at (0, 0) and have it be i32 so we can traverse
 /// in all directions. We will need a utility method for determining
@@ -170,6 +128,7 @@ fn _ref_follow_the_head(
 /// also need a `HashSet` to keep track of the locations the T
 /// has been.
 ///
+#[allow(dead_code)]
 pub fn solution_1(filepath: &str) -> i32 {
     let lines = utils::read_file(filepath).unwrap();
     let mut dir_to_dir_map = HashMap::new();
