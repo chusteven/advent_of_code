@@ -54,6 +54,14 @@ pub fn solution_2(filepath: &str) -> i32 {
 /// needs to follow the head). And then, if the tail is less than
 /// length 9, `push_back((0, 0))`.
 ///
+/// Notes to self: This method should do stuff --
+/// 1. Pop off front -- `pop_front()`
+/// 2. How does this compare to `cur_h`?
+/// 3. Move it accordingly -- can send to `follow_the_head`
+///     - `cur_h`, call popped `cur_t`, need `diff`, send in `seen`
+/// 4. Pop off the rest, move those accordingly
+///     - ... maybe `diff` changes...
+///
 fn follow_the_head_long_tail(
     cur_h: &mut (i32, i32),
     tail: &mut VecDeque<(i32, i32)>,
@@ -61,14 +69,10 @@ fn follow_the_head_long_tail(
     seen: &mut HashSet<(i32, i32)>,
     k: usize,
 ) {
-    // Do stuff
-    // 1/ Pop off front -- `pop_front()`
-    // 2/ How does this compare to `cur_h`?
-    // 3/ Move it accordingly -- can send to `follow_the_head`
-    //  - `cur_h`, call popped `cur_t`, need `diff`, send in `seen`
-    // 4/ Pop off the rest, move those accordingly
-    //  - ... maybe `diff` changes...
     let mut cur_t = tail.pop_front().unwrap();
+
+    // IMPORTANT: This ended up being the thing that f***ed me; I was
+    // adding to `seen` too often :( :( :(
     follow_the_head(cur_h, &mut cur_t, diff, seen, false);
     tail.push_front(cur_t);
     for i in 0..(tail.len() - 1) {
@@ -85,6 +89,10 @@ fn follow_the_head_long_tail(
         // (1) went somewhere, but still touching
         // (2) went somewhere V or H, but no longer touching
         // (3) went somewhere D, but no longer touching
+
+        // FIXME: Can make the below method simply to follow
+        // this model as well. Or probably just refactor the
+        // entire damn thing...
 
         // (1)
         if (_cur_t == _cur_h)
@@ -107,11 +115,6 @@ fn follow_the_head_long_tail(
         }
         // (3)
         else {
-            if _dy == 2 {
-                // Primarily went l/r
-            } else {
-                // Primarily went u/d
-            }
             dx = if _cur_h.0 - _cur_t.0 > 0 { 1 } else { -1 };
             dy = if _cur_h.1 - _cur_t.1 > 0 { 1 } else { -1 };
         }
