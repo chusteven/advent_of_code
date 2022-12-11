@@ -1,3 +1,4 @@
+use core::num;
 use std::collections::HashMap;
 
 use crate::yr_2022::problems::utils;
@@ -26,9 +27,20 @@ pub fn solution_1(input_file: &str) -> i32 {
     // b/ Their operation (doesn't change)
     // c/ Their test (doesn't change)
     // d/ Outcome
-    let monkeys = process_input(lines);
+    let mut monkeys = process_input(lines);
     println!("{:#?}", monkeys);
+    let num_rounds = 20;
+    let mut monkey_to_items_processed = HashMap::new();
+    for _ in 0..num_rounds {
+        process_round(&mut monkeys, &mut monkey_to_items_processed);
+    }
     0
+}
+
+fn process_round(
+    monkeys: &mut HashMap<usize, Monkey>,
+    monkey_to_items_processed: &mut HashMap<usize, i32>,
+) {
 }
 
 fn process_input(lines: Vec<String>) -> HashMap<usize, Monkey> {
@@ -41,11 +53,21 @@ fn process_input(lines: Vec<String>) -> HashMap<usize, Monkey> {
     let mut false_outcome = 0;
     for (i, line) in lines.iter().enumerate() {
         if line.starts_with("Monkey") {
-            let parts: Vec<&str> = line.split(' ').collect();
-            monkey_no = parts[1].replace(":", "").trim().parse::<usize>().unwrap();
+            monkey_no = line
+                .split(' ')
+                .into_iter()
+                .nth(2)
+                .unwrap()
+                .replace(":", "")
+                .trim()
+                .parse::<usize>()
+                .unwrap();
         } else if line.starts_with("  Starting items:") {
-            let parts: Vec<&str> = line.split(':').collect();
-            items = parts[1]
+            items = line
+                .split(':')
+                .into_iter()
+                .nth(2)
+                .unwrap()
                 .split(',')
                 .into_iter()
                 .map(|s| s.trim())
@@ -55,11 +77,11 @@ fn process_input(lines: Vec<String>) -> HashMap<usize, Monkey> {
         } else if line.starts_with("  Operation:") {
             let parts = line
                 .split(" new = old ")
-                .collect::<Vec<&str>>()
                 .into_iter()
                 .map(|s| s.trim())
                 .filter(|s| !s.is_empty())
-                .collect::<Vec<&str>>()[1]
+                .nth(2)
+                .unwrap()
                 .split(' ')
                 .into_iter()
                 .collect::<Vec<&str>>();
@@ -76,22 +98,18 @@ fn process_input(lines: Vec<String>) -> HashMap<usize, Monkey> {
         } else if line.starts_with("    If true:") {
             true_outcome = line
                 .split(" throw to monkey ")
-                .collect::<Vec<&str>>()
                 .into_iter()
                 .map(|s| s.trim())
                 .filter(|s| !s.is_empty())
-                // .map(|s| s.parse::<usize>().unwrap())
                 .collect::<Vec<&str>>()[1]
                 .parse::<usize>()
                 .unwrap();
         } else if line.starts_with("    If false:") {
             false_outcome = line
                 .split(" throw to monkey ")
-                .collect::<Vec<&str>>()
                 .into_iter()
                 .map(|s| s.trim())
                 .filter(|s| !s.is_empty())
-                // .map(|s| s.parse::<usize>().unwrap())
                 .collect::<Vec<&str>>()[1]
                 .parse::<usize>()
                 .unwrap();
@@ -102,7 +120,7 @@ fn process_input(lines: Vec<String>) -> HashMap<usize, Monkey> {
                 Monkey {
                     items: items.clone(),
                     operation: operation.clone(),
-                    divisible_test: divisible_test,
+                    divisible_test,
                     outcome: (true_outcome, false_outcome),
                 },
             );
