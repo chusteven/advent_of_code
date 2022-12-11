@@ -1,3 +1,5 @@
+use std::collections::HashMap;
+
 use crate::yr_2022::problems::utils;
 
 pub fn solution_2(input_file: &str) -> i32 {
@@ -8,10 +10,103 @@ pub fn solution_2(input_file: &str) -> i32 {
     0
 }
 
+#[derive(Debug)]
+struct Monkey {
+    items: Vec<i32>,
+    operation: (String, i32),
+    divisible_test: i32,
+    outcome: (usize, usize),
+}
+
 pub fn solution_1(input_file: &str) -> i32 {
     let lines = utils::read_file(input_file).unwrap();
-    for line in lines {
-        //
-    }
+    // We need to get n -- how many monkeys
+    // And for each monkey we should have
+    // a/ What items they start with (changes)
+    // b/ Their operation (doesn't change)
+    // c/ Their test (doesn't change)
+    // d/ Outcome
+    let monkeys = process_input(lines);
+    println!("{:#?}", monkeys);
     0
+}
+
+fn process_input(lines: Vec<String>) -> HashMap<usize, Monkey> {
+    let mut monkeys = HashMap::new();
+    let mut monkey_no = 0;
+    let mut items: Vec<i32> = vec![];
+    let mut operation = (String::from(""), 0);
+    let mut divisible_test = 0;
+    let mut true_outcome = 0;
+    let mut false_outcome = 0;
+    for (i, line) in lines.iter().enumerate() {
+        if line.starts_with("Monkey") {
+            let parts: Vec<&str> = line.split(' ').collect();
+            monkey_no = parts[1].replace(":", "").trim().parse::<usize>().unwrap();
+        } else if line.starts_with("  Starting items:") {
+            let parts: Vec<&str> = line.split(':').collect();
+            items = parts[1]
+                .split(',')
+                .into_iter()
+                .map(|s| s.trim())
+                .filter(|s| !s.is_empty())
+                .map(|s| s.parse::<i32>().unwrap())
+                .collect();
+        } else if line.starts_with("  Operation:") {
+            let parts = line
+                .split(" new = old ")
+                .collect::<Vec<&str>>()
+                .into_iter()
+                .map(|s| s.trim())
+                .filter(|s| !s.is_empty())
+                .collect::<Vec<&str>>()[1]
+                .split(' ')
+                .into_iter()
+                .collect::<Vec<&str>>();
+            if parts[1] == "old" {
+                operation = ("^2".to_string(), 0);
+            } else {
+                operation = (parts[0].to_string(), parts[1].parse::<i32>().unwrap());
+            }
+        } else if line.starts_with("  Test:") {
+            divisible_test = line.split("divisible by ").collect::<Vec<&str>>()[1]
+                .trim()
+                .parse::<i32>()
+                .unwrap();
+        } else if line.starts_with("    If true:") {
+            true_outcome = line
+                .split(" throw to monkey ")
+                .collect::<Vec<&str>>()
+                .into_iter()
+                .map(|s| s.trim())
+                .filter(|s| !s.is_empty())
+                // .map(|s| s.parse::<usize>().unwrap())
+                .collect::<Vec<&str>>()[1]
+                .parse::<usize>()
+                .unwrap();
+        } else if line.starts_with("    If false:") {
+            false_outcome = line
+                .split(" throw to monkey ")
+                .collect::<Vec<&str>>()
+                .into_iter()
+                .map(|s| s.trim())
+                .filter(|s| !s.is_empty())
+                // .map(|s| s.parse::<usize>().unwrap())
+                .collect::<Vec<&str>>()[1]
+                .parse::<usize>()
+                .unwrap();
+        }
+        if line.trim().is_empty() || i == lines.len() - 1 {
+            monkeys.insert(
+                monkey_no,
+                Monkey {
+                    items: items.clone(),
+                    operation: operation.clone(),
+                    divisible_test: divisible_test,
+                    outcome: (true_outcome, false_outcome),
+                },
+            );
+        }
+    }
+    monkeys
 }
