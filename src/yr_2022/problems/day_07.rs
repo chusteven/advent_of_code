@@ -3,6 +3,7 @@ use std::collections::{HashMap, HashSet};
 
 use crate::yr_2022::problems::utils;
 
+#[allow(dead_code)]
 pub fn solution_2(filepath: &str) -> i32 {
     let lines = utils::read_file(filepath).unwrap();
     let mut is_listing: bool = false;
@@ -112,6 +113,7 @@ struct Path {
     dirs: HashSet<String>,
 }
 
+#[allow(dead_code)]
 pub fn solution_1(filepath: &str) -> i32 {
     let lines = utils::read_file(filepath).unwrap();
     let mut is_listing: bool = false;
