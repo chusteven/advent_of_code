@@ -3,6 +3,7 @@ use std::collections::{HashMap, HashSet};
 
 use crate::yr_2022::problems::utils;
 
+#[allow(dead_code)]
 pub fn solution_2(filepath: &str) -> i32 {
     let lines = utils::read_file(filepath).unwrap();
     let mut is_listing: bool = false;
@@ -82,13 +83,11 @@ pub fn solution_2(filepath: &str) -> i32 {
         .iter()
         .map(|(_, v)| v.total_size)
         .collect::<Vec<i32>>();
-    sizes.sort_by(|a, b| b.cmp(&a));
+    sizes.sort_by(|a, b| b.cmp(a));
     let mut ans = sizes[0];
     sizes.iter().for_each(|x| {
-        if *x > needed {
-            if *x < ans {
-                ans = *x;
-            }
+        if *x > needed && *x < ans {
+            ans = *x;
         }
     });
     ans
@@ -112,6 +111,7 @@ struct Path {
     dirs: HashSet<String>,
 }
 
+#[allow(dead_code)]
 pub fn solution_1(filepath: &str) -> i32 {
     let lines = utils::read_file(filepath).unwrap();
     let mut is_listing: bool = false;
