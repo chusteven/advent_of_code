@@ -3,16 +3,6 @@ use std::collections::{HashMap, HashSet};
 
 use crate::yr_2022::problems::utils;
 
-/// When ready
-// R 5
-// U 8
-// L 8
-// D 3
-// R 17
-// D 10
-// L 25
-// U 20
-
 ///
 /// Ohh... I don't know about this one.
 ///
@@ -129,8 +119,6 @@ fn follow_the_head_long_tail(
         seen.insert(*tail.back().unwrap());
     }
 }
-
-// fn paint_board(cur_h: &mut (i32, i32), tail: &VecDeque<(i32, i32)>) {}
 
 fn _ref_follow_the_head(
     cur_h: &mut (i32, i32),
