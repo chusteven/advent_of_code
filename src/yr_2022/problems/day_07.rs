@@ -83,13 +83,11 @@ pub fn solution_2(filepath: &str) -> i32 {
         .iter()
         .map(|(_, v)| v.total_size)
         .collect::<Vec<i32>>();
-    sizes.sort_by(|a, b| b.cmp(&a));
+    sizes.sort_by(|a, b| b.cmp(a));
     let mut ans = sizes[0];
     sizes.iter().for_each(|x| {
-        if *x > needed {
-            if *x < ans {
-                ans = *x;
-            }
+        if *x > needed && *x < ans {
+            ans = *x;
         }
     });
     ans

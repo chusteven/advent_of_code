@@ -41,7 +41,7 @@ pub fn solution_2(filepath: &str) -> i32 {
                 cur_h = (cur_h.0 + diff.0, cur_h.1 + diff.1);
                 continue;
             }
-            follow_the_head_long_tail(&mut cur_h, &mut tail, &diff, &mut seen, k);
+            follow_the_head_long_tail(&mut cur_h, &mut tail, diff, &mut seen, k);
         }
     }
     seen.len() as i32
@@ -173,7 +173,6 @@ fn _ref_follow_the_head(
     }
     *cur_t = (cur_t.0 + dx, cur_t.1 + dy);
     seen.insert(*cur_t);
-    return;
 }
 
 ///
