@@ -15,6 +15,7 @@ struct State {
     steps: i32,
 }
 
+#[allow(dead_code)]
 pub fn solution_2(input_file: &str) -> i32 {
     let lines = utils::read_file(input_file).unwrap();
     let mut start = (0, 0);
@@ -58,6 +59,7 @@ pub fn solution_2(input_file: &str) -> i32 {
 ///
 /// BFS I think gets us there fastest
 ///
+#[allow(dead_code)]
 pub fn solution_1(input_file: &str) -> i32 {
     let lines = utils::read_file(input_file).unwrap();
     let mut start = (0, 0);
@@ -99,7 +101,7 @@ fn bfs(
         pos: start,
         steps: 0,
     });
-    while queue.len() > 0 {
+    while !queue.is_empty() {
         let node = queue.pop_front().unwrap();
         let m = node.pos;
         let cur_v = grid[m.0 as usize][m.1 as usize];
