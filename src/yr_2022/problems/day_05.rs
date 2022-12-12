@@ -5,6 +5,8 @@ use std::collections::HashMap;
 
 use crate::yr_2022::problems::utils;
 
+type Direction = (usize, usize, usize);
+
 #[allow(dead_code)]
 pub fn solution_2(filepath: &str) -> i32 {
     let lines = utils::read_file(filepath).unwrap();
@@ -53,7 +55,7 @@ pub fn solution_1(filepath: &str) -> i32 {
     0
 }
 
-fn process_input(lines: Vec<String>) -> (HashMap<usize, Vec<char>>, Vec<(usize, usize, usize)>) {
+fn process_input(lines: Vec<String>) -> (HashMap<usize, Vec<char>>, Vec<Direction>) {
     let mut processing_stacks = true;
     let mut raw_stacks = vec![];
     let mut raw_directions = vec![];
