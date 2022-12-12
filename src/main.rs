@@ -63,11 +63,13 @@ fn invoke_solutions_i64(
 }
 
 fn main() {
-    invoke_solutions(
-        "2022",
-        "12",
-        yr_2022::problems::day_12::solution_1,
-        yr_2022::problems::day_12::solution_2,
-        true,
-    );
+    // invoke_solutions(
+    //     "2022",
+    //     "12",
+    //     yr_2022::problems::day_12::solution_1,
+    //     yr_2022::problems::day_12::solution_2,
+    //     false,
+    // );
+    let ans = yr_2022::problems::day_12::solution_2("./src/yr_2022/test_cases/day_12_real.txt");
+    println!("Ans is {ans}");
 }
