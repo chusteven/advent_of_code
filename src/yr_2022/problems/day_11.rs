@@ -104,7 +104,7 @@ pub fn solution_1(input_file: &str) -> i128 {
     for _i in 0..num_rounds {
         process_round(&mut monkeys, &mut monkey_to_items_processed, 3);
     }
-    println!("{:#?}", monkey_to_items_processed);
+    // println!("{:#?}", monkey_to_items_processed);
     let mut counts = monkey_to_items_processed
         .iter()
         .map(|(_, v)| *v)
