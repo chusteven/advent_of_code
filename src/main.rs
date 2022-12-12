@@ -33,11 +33,11 @@ fn invoke_solutions(
 }
 
 #[allow(dead_code)]
-fn invoke_solutions_i128(
+fn invoke_solutions_i64(
     year: &str,
     day: &str,
-    fn1: impl Fn(&str) -> i128,
-    fn2: impl Fn(&str) -> i128,
+    fn1: impl Fn(&str) -> i64,
+    fn2: impl Fn(&str) -> i64,
     debug_only: bool,
 ) {
     let play = format!("./src/yr_{year}/test_cases/day_{day}_play.txt");
