@@ -5,14 +5,15 @@ use std::collections::VecDeque;
 
 use crate::yr_2022::problems::utils;
 
-pub fn solution_2(input_file: &str) -> i128 {
+#[allow(dead_code)]
+pub fn solution_2(input_file: &str) -> i64 {
     let lines = utils::read_file(input_file).unwrap();
     let mut monkeys = process_input(lines);
     let num_rounds = 10_000;
     let mut monkey_to_items_processed = HashMap::new();
     let mut supermodule = 1;
     for (_, v) in monkeys.iter() {
-        supermodule = supermodule * v.borrow().divisible_test;
+        supermodule *= v.borrow().divisible_test;
     }
     for _ in 0..num_rounds {
         process_round_another_way(&mut monkeys, &mut monkey_to_items_processed, supermodule);
@@ -20,7 +21,7 @@ pub fn solution_2(input_file: &str) -> i128 {
     let mut counts = monkey_to_items_processed
         .iter()
         .map(|(_, v)| *v)
-        .collect::<Vec<i128>>();
+        .collect::<Vec<i64>>();
     counts.sort();
     let n = counts.len();
     counts[n - 1] * counts[n - 2]
@@ -28,8 +29,8 @@ pub fn solution_2(input_file: &str) -> i128 {
 
 fn process_round_another_way(
     monkeys: &mut HashMap<usize, RefCell<Monkey>>,
-    monkey_to_items_processed: &mut HashMap<usize, i128>,
-    supermodulo: i128,
+    monkey_to_items_processed: &mut HashMap<usize, i64>,
+    supermodulo: i64,
 ) {
     let mut monkey_nos = monkeys.iter().map(|(k, _)| *k).collect::<Vec<usize>>();
     monkey_nos.sort();
@@ -73,7 +74,7 @@ fn process_round_another_way(
                 }
                 Occupied(mut e) => {
                     let x = e.get_mut();
-                    *x = *x + 1;
+                    *x += 1
                 }
             }
         }
@@ -83,13 +84,14 @@ fn process_round_another_way(
 
 #[derive(Debug)]
 struct Monkey {
-    items: VecDeque<i128>, // Mutates from round to round
-    operation: (String, i128),
-    divisible_test: i128,
+    items: VecDeque<i64>, // Mutates from round to round
+    operation: (String, i64),
+    divisible_test: i64,
     outcome: (usize, usize),
 }
 
-pub fn solution_1(input_file: &str) -> i128 {
+#[allow(dead_code)]
+pub fn solution_1(input_file: &str) -> i64 {
     let lines = utils::read_file(input_file).unwrap();
     // We need to get n -- how many monkeys
     // And for each monkey we should have
@@ -108,7 +110,7 @@ pub fn solution_1(input_file: &str) -> i128 {
     let mut counts = monkey_to_items_processed
         .iter()
         .map(|(_, v)| *v)
-        .collect::<Vec<i128>>();
+        .collect::<Vec<i64>>();
     counts.sort();
     let n = counts.len();
     counts[n - 1] * counts[n - 2]
@@ -116,8 +118,8 @@ pub fn solution_1(input_file: &str) -> i128 {
 
 fn process_round(
     monkeys: &mut HashMap<usize, RefCell<Monkey>>,
-    monkey_to_items_processed: &mut HashMap<usize, i128>,
-    stress_divide_by: i128,
+    monkey_to_items_processed: &mut HashMap<usize, i64>,
+    stress_divide_by: i64,
 ) {
     let mut monkey_nos = monkeys.iter().map(|(k, _)| *k).collect::<Vec<usize>>();
     monkey_nos.sort();
@@ -154,7 +156,7 @@ fn process_round(
                 }
                 Occupied(mut e) => {
                     let x = e.get_mut();
-                    *x = *x + 1;
+                    *x += 1
                 }
             }
         }
@@ -165,7 +167,7 @@ fn process_round(
 fn process_input(lines: Vec<String>) -> HashMap<usize, RefCell<Monkey>> {
     let mut monkeys = HashMap::new();
     let mut monkey_no = 0;
-    let mut items: VecDeque<i128> = VecDeque::new();
+    let mut items: VecDeque<i64> = VecDeque::new();
     let mut operation = (String::from(""), 0);
     let mut divisible_test = 0;
     let mut true_outcome = 0;
@@ -177,7 +179,7 @@ fn process_input(lines: Vec<String>) -> HashMap<usize, RefCell<Monkey>> {
                 .into_iter()
                 .nth(1)
                 .unwrap()
-                .replace(":", "")
+                .replace(':', "")
                 .trim()
                 .parse::<usize>()
                 .unwrap();
@@ -191,7 +193,7 @@ fn process_input(lines: Vec<String>) -> HashMap<usize, RefCell<Monkey>> {
                 .into_iter()
                 .map(|s| s.trim())
                 .filter(|s| !s.is_empty())
-                .map(|s| s.parse::<i128>().unwrap())
+                .map(|s| s.parse::<i64>().unwrap())
                 .collect();
         } else if line.starts_with("  Operation:") {
             let parts = line
@@ -207,12 +209,12 @@ fn process_input(lines: Vec<String>) -> HashMap<usize, RefCell<Monkey>> {
             if parts[1] == "old" {
                 operation = ("^2".to_string(), 0);
             } else {
-                operation = (parts[0].to_string(), parts[1].parse::<i128>().unwrap());
+                operation = (parts[0].to_string(), parts[1].parse::<i64>().unwrap());
             }
         } else if line.starts_with("  Test:") {
             divisible_test = line.split("divisible by ").collect::<Vec<&str>>()[1]
                 .trim()
-                .parse::<i128>()
+                .parse::<i64>()
                 .unwrap();
         } else if line.starts_with("    If true:") {
             true_outcome = line

@@ -32,11 +32,12 @@ fn invoke_solutions(
     }
 }
 
-fn invoke_solutions_i128(
+#[allow(dead_code)]
+fn invoke_solutions_i64(
     year: &str,
     day: &str,
-    fn1: impl Fn(&str) -> i128,
-    fn2: impl Fn(&str) -> i128,
+    fn1: impl Fn(&str) -> i64,
+    fn2: impl Fn(&str) -> i64,
     debug_only: bool,
 ) {
     let play = format!("./src/yr_{year}/test_cases/day_{day}_play.txt");
@@ -62,11 +63,11 @@ fn invoke_solutions_i128(
 }
 
 fn main() {
-    invoke_solutions_i128(
+    invoke_solutions(
         "2022",
-        "11",
-        yr_2022::problems::day_11::solution_1,
-        yr_2022::problems::day_11::solution_2,
+        "12",
+        yr_2022::problems::day_12::solution_1,
+        yr_2022::problems::day_12::solution_2,
         false,
     );
 }
