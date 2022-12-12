@@ -1,4 +1,4 @@
-use core::num;
+use std::collections::hash_map::Entry::{Occupied, Vacant};
 use std::collections::HashMap;
 
 use crate::yr_2022::problems::utils;
@@ -13,7 +13,7 @@ pub fn solution_2(input_file: &str) -> i32 {
 
 #[derive(Debug)]
 struct Monkey {
-    items: Vec<i32>,
+    items: Vec<i32>, // Mutates from round to round
     operation: (String, i32),
     divisible_test: i32,
     outcome: (usize, usize),
@@ -28,19 +28,69 @@ pub fn solution_1(input_file: &str) -> i32 {
     // c/ Their test (doesn't change)
     // d/ Outcome
     let mut monkeys = process_input(lines);
-    println!("{:#?}", monkeys);
     let num_rounds = 20;
     let mut monkey_to_items_processed = HashMap::new();
     for _ in 0..num_rounds {
         process_round(&mut monkeys, &mut monkey_to_items_processed);
     }
-    0
+    println!("{:#?}", monkey_to_items_processed);
+    let mut counts = monkey_to_items_processed
+        .iter()
+        .map(|(_, v)| *v)
+        .collect::<Vec<i32>>();
+    counts.sort();
+    let n = counts.len();
+    counts[n - 1] * counts[n - 2]
 }
 
 fn process_round(
     monkeys: &mut HashMap<usize, Monkey>,
     monkey_to_items_processed: &mut HashMap<usize, i32>,
 ) {
+    let mut items_for_next_monkey: HashMap<usize, Vec<i32>> = HashMap::new();
+    let mut monkey_nos = monkeys.iter().map(|(k, _)| *k).collect::<Vec<usize>>();
+    monkey_nos.sort();
+    for monkey_no in monkey_nos {
+        let monkey = monkeys.get(&monkey_no).unwrap();
+        let (op, op_val) = &monkey.operation;
+        let divisible_test = monkey.divisible_test;
+        let (t_outcome, f_outcome) = monkey.outcome;
+        for item in &monkey.items {
+            let mut new_worry_level = {
+                match op.as_str() {
+                    "*" => item * op_val,
+                    "/" => item / op_val,
+                    "+" => item + op_val,
+                    "-" => item - op_val,
+                    "^2" => item * item,
+                    _ => panic!("Unknown operation"),
+                }
+            };
+            new_worry_level /= 3;
+            // TODO: DRY this code
+            if new_worry_level % divisible_test == 0 {
+                let next_monkey = monkeys.get_mut(&t_outcome).unwrap();
+                // t_outcome
+            } else {
+                // f_outcome
+            }
+        }
+        // match monkey_to_items_processed.entry(monkey_no) {
+        //     Vacant(e) => {
+        //         e.insert(monkey.items.len() as i32);
+        //     }
+        //     Occupied(mut e) => {
+        //         let x = e.get_mut();
+        //         *x = *x + (monkey.items.len() as i32)
+        //     }
+        // }
+    }
+    // println!("Beg of round: {:#?}", monkeys);
+    for (monkey_no, items) in items_for_next_monkey {
+        let e = monkeys.get_mut(&monkey_no).unwrap();
+        e.items = items;
+    }
+    // println!("End of round: {:#?}", monkeys);
 }
 
 fn process_input(lines: Vec<String>) -> HashMap<usize, Monkey> {
@@ -56,7 +106,7 @@ fn process_input(lines: Vec<String>) -> HashMap<usize, Monkey> {
             monkey_no = line
                 .split(' ')
                 .into_iter()
-                .nth(2)
+                .nth(1)
                 .unwrap()
                 .replace(":", "")
                 .trim()
@@ -66,7 +116,7 @@ fn process_input(lines: Vec<String>) -> HashMap<usize, Monkey> {
             items = line
                 .split(':')
                 .into_iter()
-                .nth(2)
+                .nth(1)
                 .unwrap()
                 .split(',')
                 .into_iter()
@@ -80,7 +130,7 @@ fn process_input(lines: Vec<String>) -> HashMap<usize, Monkey> {
                 .into_iter()
                 .map(|s| s.trim())
                 .filter(|s| !s.is_empty())
-                .nth(2)
+                .nth(1)
                 .unwrap()
                 .split(' ')
                 .into_iter()
