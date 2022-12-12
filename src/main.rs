@@ -32,6 +32,7 @@ fn invoke_solutions(
     }
 }
 
+#[allow(dead_code)]
 fn invoke_solutions_i128(
     year: &str,
     day: &str,
@@ -62,11 +63,11 @@ fn invoke_solutions_i128(
 }
 
 fn main() {
-    invoke_solutions_i128(
+    invoke_solutions(
         "2022",
-        "11",
-        yr_2022::problems::day_11::solution_1,
-        yr_2022::problems::day_11::solution_2,
-        false,
+        "12",
+        yr_2022::problems::day_12::solution_1,
+        yr_2022::problems::day_12::solution_2,
+        true,
     );
 }

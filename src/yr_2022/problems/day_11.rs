@@ -5,6 +5,7 @@ use std::collections::VecDeque;
 
 use crate::yr_2022::problems::utils;
 
+#[allow(dead_code)]
 pub fn solution_2(input_file: &str) -> i128 {
     let lines = utils::read_file(input_file).unwrap();
     let mut monkeys = process_input(lines);
@@ -12,7 +13,7 @@ pub fn solution_2(input_file: &str) -> i128 {
     let mut monkey_to_items_processed = HashMap::new();
     let mut supermodule = 1;
     for (_, v) in monkeys.iter() {
-        supermodule = supermodule * v.borrow().divisible_test;
+        supermodule *= v.borrow().divisible_test;
     }
     for _ in 0..num_rounds {
         process_round_another_way(&mut monkeys, &mut monkey_to_items_processed, supermodule);
@@ -73,7 +74,7 @@ fn process_round_another_way(
                 }
                 Occupied(mut e) => {
                     let x = e.get_mut();
-                    *x = *x + 1;
+                    *x += 1
                 }
             }
         }
@@ -89,6 +90,7 @@ struct Monkey {
     outcome: (usize, usize),
 }
 
+#[allow(dead_code)]
 pub fn solution_1(input_file: &str) -> i128 {
     let lines = utils::read_file(input_file).unwrap();
     // We need to get n -- how many monkeys
@@ -154,7 +156,7 @@ fn process_round(
                 }
                 Occupied(mut e) => {
                     let x = e.get_mut();
-                    *x = *x + 1;
+                    *x += 1
                 }
             }
         }
@@ -177,7 +179,7 @@ fn process_input(lines: Vec<String>) -> HashMap<usize, RefCell<Monkey>> {
                 .into_iter()
                 .nth(1)
                 .unwrap()
-                .replace(":", "")
+                .replace(':', "")
                 .trim()
                 .parse::<usize>()
                 .unwrap();
