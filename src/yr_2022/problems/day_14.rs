@@ -2,19 +2,45 @@ use crate::yr_2022::problems::utils;
 
 pub fn solution_2(input_file: &str) -> i32 {
     let lines = utils::read_file(input_file).unwrap();
-    for _line in lines {
-        //
+    let mut board = parse_input(lines, 2);
+    board[0][500] = '+';
+    let mut ans = 0;
+    let start_pos = (500, 0);
+    loop {
+        if !_add_sand_to_board(&mut board, &start_pos) {
+            ans += 1;
+            break;
+        }
+        ans += 1;
     }
-    0
+    ans
+}
+
+fn _add_sand_to_board(board: &mut Vec<Vec<char>>, start_pos: &(usize, usize)) -> bool {
+    let mut sand_pos = *start_pos;
+
+    loop {
+        let moved = next_sand_pos(&mut sand_pos, board);
+        if !moved {
+            break;
+        }
+    }
+
+    // Note the new stopping condition
+    if sand_pos == *start_pos {
+        return false;
+    }
+    true
 }
 
 pub fn solution_1(input_file: &str) -> i32 {
     let lines = utils::read_file(input_file).unwrap();
-    let mut board = parse_input(lines);
-    board[0][50] = '+';
+    let mut board = parse_input(lines, 0);
+    board[0][500] = '+';
     let mut ans = 0;
+    let start_pos = (500, 0);
     loop {
-        if !add_sand_to_board(&mut board) {
+        if !add_sand_to_board(&mut board, &start_pos) {
             break;
         }
         ans += 1;
@@ -32,9 +58,9 @@ pub fn solution_1(input_file: &str) -> i32 {
 /// we just check to see when a piece of sand has gotten to the
 /// same level as the floor
 ///
-fn add_sand_to_board(board: &mut Vec<Vec<char>>) -> bool {
-    // Send sand to where it should go; and then mark it as seen
-    let mut sand_pos: (usize, usize) = (500, 0); // Change to (500, 0) eventually
+fn add_sand_to_board(board: &mut Vec<Vec<char>>, start_pos: &(usize, usize)) -> bool {
+    // Send sand to where it should go
+    let mut sand_pos = *start_pos;
 
     // A unit of sand always falls down one step if possible.
     // If the tile immediately below is blocked (by rock or sand),
@@ -58,7 +84,6 @@ fn add_sand_to_board(board: &mut Vec<Vec<char>>) -> bool {
     if sand_pos.1 == board.len() - 1 {
         return false;
     }
-
     true
 }
 
@@ -83,7 +108,7 @@ fn next_sand_pos(sand_pos: &mut (usize, usize), board: &mut Vec<Vec<char>>) -> b
     false
 }
 
-fn parse_input(lines: Vec<String>) -> Vec<Vec<char>> {
+fn parse_input(lines: Vec<String>, extra_floor: usize) -> Vec<Vec<char>> {
     let mut max_x = 0;
     let mut max_y = 0;
     for line in &lines {
@@ -107,9 +132,10 @@ fn parse_input(lines: Vec<String>) -> Vec<Vec<char>> {
         }
     }
 
-    // Note +2 to give a bottom; and the +1 so that indexing is easier
-    // May be easier to just do +2 universally...
-    let mut board = vec![vec!['.'; max_x + 1]; max_y + 2];
+    max_x *= 2; // FIXME: This seems kinda like a hack
+
+    // Note the +1 so that indexing is easier
+    let mut board = vec![vec!['.'; max_x + 1]; max_y + 1 + extra_floor];
     for line in &lines {
         let parts = line
             .split(" -> ")
@@ -129,9 +155,8 @@ fn parse_input(lines: Vec<String>) -> Vec<Vec<char>> {
                 let lower = if prv_y < cur_y { prv_y } else { cur_y };
                 let upper = if prv_y > cur_y { prv_y } else { cur_y };
 
-                // See what Clippy has to say about this :D
-                for j in lower..(upper + 1) {
-                    board[j][prv_x] = '#';
+                for board_item in board.iter_mut().take(upper + 1).skip(lower) {
+                    board_item[prv_x] = '#';
                 }
             } else {
                 // Same row, so go left/right
@@ -141,6 +166,12 @@ fn parse_input(lines: Vec<String>) -> Vec<Vec<char>> {
                     board[prv_y][j] = '#';
                 }
             }
+        }
+    }
+
+    if extra_floor > 0 {
+        for i in 0..max_x {
+            board[max_y + extra_floor][i] = '#';
         }
     }
     board
