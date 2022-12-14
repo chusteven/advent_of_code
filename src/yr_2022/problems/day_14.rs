@@ -1,5 +1,6 @@
 use crate::yr_2022::problems::utils;
 
+#[allow(dead_code)]
 pub fn solution_2(input_file: &str) -> i32 {
     let lines = utils::read_file(input_file).unwrap();
     let mut board = parse_input(lines, 2);
@@ -33,6 +34,7 @@ fn _add_sand_to_board(board: &mut Vec<Vec<char>>, start_pos: &(usize, usize)) ->
     true
 }
 
+#[allow(dead_code)]
 pub fn solution_1(input_file: &str) -> i32 {
     let lines = utils::read_file(input_file).unwrap();
     let mut board = parse_input(lines, 0);
