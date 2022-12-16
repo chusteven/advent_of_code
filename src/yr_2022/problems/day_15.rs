@@ -1,4 +1,4 @@
-use std::collections::{HashSet, VecDeque};
+use std::collections::{hash_map::Entry, HashMap, HashSet, VecDeque};
 
 use crate::yr_2022::problems::utils;
 
@@ -14,79 +14,65 @@ pub fn solution_2(input_file: &str) -> i32 {
     let lines = utils::read_file(input_file).unwrap();
     let (sensors, beacons) = parse_input(lines);
 
-    // let (max_x, max_y) = get_maxes(&sensors, &beacons);
     let debug = false;
-    let max_x: i32 = if !debug { 4_000_000 } else { 20 };
-    let max_y: i32 = if !debug { 4_000_000 } else { 20 };
-    println!("Initializing"); // This is what's taking forever
-    let mut rows = vec![vec!['.'; max_x as usize * 2 + 1]; max_y as usize * 2 + 1];
-    println!("Finished");
-    println!(
-        "max_x is {max_x}; max_y is {max_y}; rows is dimension {} rows and {} cols",
-        rows.len(),
-        rows[0].len(),
-    );
+    let max_coord: i32 = if !debug { 4_000_000 } else { 20 };
+    let mut taken_cords: HashMap<(i32, i32), char> = HashMap::new();
 
-    sensors
-        .iter()
-        .zip(beacons.iter())
-        .map(|(s, b)| {
-            // print!("Mapping at original sensor [{:?}] and beacon [{:?}]", s, b);
-            ((s.0 + max_x, s.1 + max_y), (b.0 + max_x, b.1 + max_y))
-        })
-        .for_each(|(s, b)| {
-            // println!(" and now sensor is {:?}", s);
-            let (sx, sy) = s;
-            let (bx, by) = b;
+    sensors.iter().zip(beacons.iter()).for_each(|(s, b)| {
+        let (sx, sy) = s;
+        let (bx, by) = b;
 
-            if sy <= rows.len() as i32 && sx <= rows[0].len() as i32 {
-                rows[sy as usize][sx as usize] = 'S';
-            }
-            if by <= rows.len() as i32 && bx <= rows[0].len() as i32 {
-                rows[by as usize][bx as usize] = 'B';
-            }
+        if let Entry::Vacant(v) = taken_cords.entry(*s) {
+            v.insert('S');
+        };
 
-            let manhattan_dist = (sx - bx).abs() + (sy - by).abs();
+        if let Entry::Vacant(v) = taken_cords.entry(*b) {
+            v.insert('B');
+        };
 
-            let mut queue: VecDeque<(i32, i32)> = VecDeque::new();
-            let mut seen: HashSet<(i32, i32)> = HashSet::new();
-            queue.push_back(s);
-            while !queue.is_empty() {
-                let m = queue.pop_front().unwrap();
-                for (dx, dy) in DIRECTIONS {
-                    let next = (m.0 + dx, m.1 + dy);
-                    let cur_manhattan_dist = (next.0 - sx).abs() + (next.1 - sy).abs();
-                    if next.0 < 0
-                        || next.1 < 0
-                        || next.0 >= rows[0].len() as i32
-                        || next.1 >= rows.len() as i32
-                        || cur_manhattan_dist > manhattan_dist
-                        || seen.contains(&next)
-                    {
-                        continue;
-                    }
-                    if rows[next.1 as usize][next.0 as usize] == '.' {
-                        rows[next.1 as usize][next.0 as usize] = '#';
-                    }
-                    seen.insert(next);
-                    queue.push_back(next);
+        let manhattan_dist = (sx - bx).abs() + (sy - by).abs();
+
+        println!(
+            "Starting to search from {:?} with MD of {:?}",
+            s, manhattan_dist
+        );
+        let mut queue: VecDeque<(i32, i32)> = VecDeque::new();
+        let mut seen: HashSet<(i32, i32)> = HashSet::new();
+        queue.push_back(*s);
+        while !queue.is_empty() {
+            let m = queue.pop_front().unwrap();
+            for (dx, dy) in DIRECTIONS {
+                let next = (m.0 + dx, m.1 + dy);
+                let cur_manhattan_dist = (next.0 - sx).abs() + (next.1 - sy).abs();
+                if next.0 < 0
+                    || next.1 < 0
+                    || next.0 > max_coord as i32
+                    || next.1 > max_coord as i32
+                    || cur_manhattan_dist > manhattan_dist
+                    || seen.contains(&next)
+                {
+                    continue;
                 }
+                if let Entry::Vacant(v) = taken_cords.entry(next) {
+                    v.insert('#');
+                };
+                seen.insert(next);
+                queue.push_back(next);
             }
-        });
+        }
+        println!("Finished search!");
+    });
 
-    // println!("{:?}", rows);
-    for (i, row) in rows.iter().enumerate() {
-        for (j, v) in row.iter().enumerate() {
-            if (i as i32) < max_y || (i as i32) > max_y * 2 {
-                continue;
-            }
-            if (j as i32) < max_x || (j as i32) > max_x * 2 {
-                continue;
-            }
-            if *v == '.' {
-                // println!("Found it at (x, y) = ({j}, {i})");
-                return (j as i32 - max_y) * 4_000_000 + (i as i32 - max_x);
-            }
+    // println!("{:?}", taken_cords);
+    for i in 0..max_coord {
+        for j in 0..max_coord {
+            let coordinate = (i, j);
+            match taken_cords.entry(coordinate) {
+                Entry::Vacant(_) => {
+                    return i * 4_000_000 + j;
+                }
+                Entry::Occupied(_) => (),
+            };
         }
     }
     0
@@ -104,10 +90,6 @@ pub fn solution_1(input_file: &str) -> i32 {
     let (max_x, max_y) = get_maxes(&sensors, &beacons);
     let mut row = vec!['.'; ((max_x as usize) * 4) + 1];
     let row_of_interest = if true { 2_000_000 + max_y } else { 10 + max_y };
-    // println!(
-    //     "max_x is {max_x}; max_y is {max_y}; row of interest is {row_of_interest}; row is len {}",
-    //     row.len()
-    // );
 
     sensors
         .iter()
@@ -141,7 +123,6 @@ pub fn solution_1(input_file: &str) -> i32 {
             }
         });
 
-    // println!("{:?}", row);
     let mut ans = 0;
     for i in row {
         if i != '.' {
@@ -151,38 +132,7 @@ pub fn solution_1(input_file: &str) -> i32 {
     ans
 }
 
-fn mark_grid_at_row(
-    point: &(i32, i32),
-    row: &mut Vec<char>,
-    max_x: &usize,
-    max_y: &usize,
-    manhattan_dist: &i32,
-    row_of_interest: &i32,
-) {
-    // BFS outward; stopping condition is when Manhattan distance is farther
-    // than it is now
-    let mut queue: VecDeque<(usize, usize)> = VecDeque::new();
-    let start = (max_x + point.0 as usize, max_y + point.1 as usize);
-    queue.push_back(start);
-
-    while !queue.is_empty() {
-        let m = queue.pop_front().unwrap();
-        for dir in DIRECTIONS {
-            let next = (m.0 as i32 + dir.0, m.1 as i32 + dir.1);
-            if ((start.0 as i32 - next.0).abs() + (start.1 as i32 - next.1).abs()) > *manhattan_dist
-            {
-                continue;
-            }
-            let next = (next.0 as usize, next.1 as usize);
-            if next.1 == *row_of_interest as usize {
-                row[next.0] = '#';
-            }
-            queue.push_back(next);
-        }
-    }
-}
-
-fn get_maxes(sensors: &Vec<(i32, i32)>, beacons: &Vec<(i32, i32)>) -> (i32, i32) {
+fn get_maxes(sensors: &[(i32, i32)], beacons: &[(i32, i32)]) -> (i32, i32) {
     let mut max_x = 0;
     let mut max_y = 0;
     sensors.iter().zip(beacons.iter()).for_each(|(s, b)| {
