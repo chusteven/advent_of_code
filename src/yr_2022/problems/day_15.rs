@@ -32,12 +32,16 @@ pub fn solution_2(input_file: &str) -> i32 {
 
         let manhattan_dist = (sx - bx).abs() + (sy - by).abs();
 
+        // The problem statement is: how to mark all places that a beacon cannot
+        // possibly be and very quickly...
+        // Come to think of it, another way I could do it is simply inside a for
+        // loop
+
         println!(
             "Starting to search from {:?} with MD of {:?}",
             s, manhattan_dist
         );
         let mut queue: VecDeque<(i32, i32)> = VecDeque::new();
-        let mut seen: HashSet<(i32, i32)> = HashSet::new();
         queue.push_back(*s);
         while !queue.is_empty() {
             let m = queue.pop_front().unwrap();
@@ -49,14 +53,13 @@ pub fn solution_2(input_file: &str) -> i32 {
                     || next.0 > max_coord as i32
                     || next.1 > max_coord as i32
                     || cur_manhattan_dist > manhattan_dist
-                    || seen.contains(&next)
+                    || taken_cords.contains_key(&next)
                 {
                     continue;
                 }
                 if let Entry::Vacant(v) = taken_cords.entry(next) {
                     v.insert('#');
-                };
-                seen.insert(next);
+                }
                 queue.push_back(next);
             }
         }
@@ -75,6 +78,50 @@ pub fn solution_2(input_file: &str) -> i32 {
             };
         }
     }
+    0
+}
+
+#[allow(dead_code)]
+pub fn solution_2_try_2(input_file: &str) -> i32 {
+    let lines = utils::read_file(input_file).unwrap();
+    let (sensors, beacons) = parse_input(lines);
+
+    let debug = true;
+    let max_coord: i32 = if !debug { 4_000_000 } else { 20 };
+
+    for i in 0..max_coord {
+        for j in 0..max_coord {
+            let mut should_continue = false;
+
+            // This is somewhat fast, but when doing a n^2 search, then
+            // each iteration's time starts adding up...
+            sensors.iter().zip(beacons.iter()).for_each(|(s, b)| {
+                let (sx, sy) = s;
+                let (bx, by) = b;
+
+                // Between sensor and beacon there are no other beacons
+                // So if this point is between then, then it's reachable
+                // and we can immediately continue
+                // If not, then we know we are in a special position
+                // where we must be the single beacon
+
+                let manhattan_dist = (sx - bx).abs() + (sy - by).abs();
+                let md_from_cur = (i - sx).abs() + (j - sy).abs();
+                if md_from_cur <= manhattan_dist {
+                    if !should_continue {
+                        should_continue = true;
+                        return;
+                    }
+                }
+            });
+            if should_continue {
+                continue;
+            }
+            println!("Found the answer at ({i}, {j})");
+            return i * 4_000_000 + j;
+        }
+    }
+
     0
 }
 
