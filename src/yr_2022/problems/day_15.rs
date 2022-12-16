@@ -12,10 +12,53 @@ const DIRECTIONS: &[(i32, i32); 4] = &[
 #[allow(dead_code)]
 pub fn solution_2(input_file: &str) -> i32 {
     let lines = utils::read_file(input_file).unwrap();
-    for _line in lines {
-        //
-    }
-    0
+    let (sensors, beacons) = parse_input(lines);
+
+    let (max_x, max_y) = get_maxes(&sensors, &beacons);
+    println!("Starting")
+    let mut rows = vec![vec!['.'; ((max_x as usize) * 4) + 1]; (max_y as usize) * 4 + 1];
+    println!("Finishing")
+    let row_of_interest = if true { 2_000_000 + max_y } else { 10 + max_y };
+    println!(
+        "max_x is {max_x}; max_y is {max_y}; row of interest is {row_of_interest}; row is len {}",
+        rows.len()
+    );
+
+    // sensors
+    //     .iter()
+    //     .zip(beacons.iter())
+    //     .map(|(s, b)| {
+    //         // print!("Mapping at original sensor [{:?}] and beacon [{:?}]", s, b);
+    //         ((s.0 + max_x, s.1 + max_y), (b.0 + max_x, b.1 + max_y))
+    //     })
+    //     .for_each(|(s, b)| {
+    //         let (sx, sy) = s;
+    //         let (bx, by) = b;
+
+    //         if sy == row_of_interest {
+    //             row[sx as usize] = 'S';
+    //         }
+    //         if by == row_of_interest {
+    //             row[bx as usize] = 'B';
+    //         }
+
+    //         let manhattan_dist = (sx - bx).abs() + (sy - by).abs();
+    //         // println!(" and manhattan dist is: {}", manhattan_dist);
+
+    //         if (sy - row_of_interest).abs() <= manhattan_dist {
+    //             let diff = manhattan_dist - (sy - row_of_interest).abs();
+    //             for i in (sx - diff)..(sx + diff) {
+    //                 if row[i as usize] != '.' {
+    //                     continue;
+    //                 }
+    //                 row[i as usize] = '#';
+    //             }
+    //         }
+    //     });
+
+    let mut ans = 0;
+
+    ans
 }
 
 ///
