@@ -14,51 +14,82 @@ pub fn solution_2(input_file: &str) -> i32 {
     let lines = utils::read_file(input_file).unwrap();
     let (sensors, beacons) = parse_input(lines);
 
-    let (max_x, max_y) = get_maxes(&sensors, &beacons);
-    println!("Starting")
-    let mut rows = vec![vec!['.'; ((max_x as usize) * 4) + 1]; (max_y as usize) * 4 + 1];
-    println!("Finishing")
-    let row_of_interest = if true { 2_000_000 + max_y } else { 10 + max_y };
+    // let (max_x, max_y) = get_maxes(&sensors, &beacons);
+    let debug = false;
+    let max_x: i32 = if !debug { 4_000_000 } else { 20 };
+    let max_y: i32 = if !debug { 4_000_000 } else { 20 };
+    println!("Initializing"); // This is what's taking forever
+    let mut rows = vec![vec!['.'; max_x as usize * 2 + 1]; max_y as usize * 2 + 1];
+    println!("Finished");
     println!(
-        "max_x is {max_x}; max_y is {max_y}; row of interest is {row_of_interest}; row is len {}",
-        rows.len()
+        "max_x is {max_x}; max_y is {max_y}; rows is dimension {} rows and {} cols",
+        rows.len(),
+        rows[0].len(),
     );
 
-    // sensors
-    //     .iter()
-    //     .zip(beacons.iter())
-    //     .map(|(s, b)| {
-    //         // print!("Mapping at original sensor [{:?}] and beacon [{:?}]", s, b);
-    //         ((s.0 + max_x, s.1 + max_y), (b.0 + max_x, b.1 + max_y))
-    //     })
-    //     .for_each(|(s, b)| {
-    //         let (sx, sy) = s;
-    //         let (bx, by) = b;
+    sensors
+        .iter()
+        .zip(beacons.iter())
+        .map(|(s, b)| {
+            // print!("Mapping at original sensor [{:?}] and beacon [{:?}]", s, b);
+            ((s.0 + max_x, s.1 + max_y), (b.0 + max_x, b.1 + max_y))
+        })
+        .for_each(|(s, b)| {
+            // println!(" and now sensor is {:?}", s);
+            let (sx, sy) = s;
+            let (bx, by) = b;
 
-    //         if sy == row_of_interest {
-    //             row[sx as usize] = 'S';
-    //         }
-    //         if by == row_of_interest {
-    //             row[bx as usize] = 'B';
-    //         }
+            if sy <= rows.len() as i32 && sx <= rows[0].len() as i32 {
+                rows[sy as usize][sx as usize] = 'S';
+            }
+            if by <= rows.len() as i32 && bx <= rows[0].len() as i32 {
+                rows[by as usize][bx as usize] = 'B';
+            }
 
-    //         let manhattan_dist = (sx - bx).abs() + (sy - by).abs();
-    //         // println!(" and manhattan dist is: {}", manhattan_dist);
+            let manhattan_dist = (sx - bx).abs() + (sy - by).abs();
 
-    //         if (sy - row_of_interest).abs() <= manhattan_dist {
-    //             let diff = manhattan_dist - (sy - row_of_interest).abs();
-    //             for i in (sx - diff)..(sx + diff) {
-    //                 if row[i as usize] != '.' {
-    //                     continue;
-    //                 }
-    //                 row[i as usize] = '#';
-    //             }
-    //         }
-    //     });
+            let mut queue: VecDeque<(i32, i32)> = VecDeque::new();
+            let mut seen: HashSet<(i32, i32)> = HashSet::new();
+            queue.push_back(s);
+            while !queue.is_empty() {
+                let m = queue.pop_front().unwrap();
+                for (dx, dy) in DIRECTIONS {
+                    let next = (m.0 + dx, m.1 + dy);
+                    let cur_manhattan_dist = (next.0 - sx).abs() + (next.1 - sy).abs();
+                    if next.0 < 0
+                        || next.1 < 0
+                        || next.0 >= rows[0].len() as i32
+                        || next.1 >= rows.len() as i32
+                        || cur_manhattan_dist > manhattan_dist
+                        || seen.contains(&next)
+                    {
+                        continue;
+                    }
+                    if rows[next.1 as usize][next.0 as usize] == '.' {
+                        rows[next.1 as usize][next.0 as usize] = '#';
+                    }
+                    seen.insert(next);
+                    queue.push_back(next);
+                }
+            }
+        });
 
-    let mut ans = 0;
-
-    ans
+    // println!("{:?}", rows);
+    for (i, row) in rows.iter().enumerate() {
+        for (j, v) in row.iter().enumerate() {
+            if (i as i32) < max_y || (i as i32) > max_y * 2 {
+                continue;
+            }
+            if (j as i32) < max_x || (j as i32) > max_x * 2 {
+                continue;
+            }
+            if *v == '.' {
+                // println!("Found it at (x, y) = ({j}, {i})");
+                return (j as i32 - max_y) * 4_000_000 + (i as i32 - max_x);
+            }
+        }
+    }
+    0
 }
 
 ///
@@ -73,10 +104,10 @@ pub fn solution_1(input_file: &str) -> i32 {
     let (max_x, max_y) = get_maxes(&sensors, &beacons);
     let mut row = vec!['.'; ((max_x as usize) * 4) + 1];
     let row_of_interest = if true { 2_000_000 + max_y } else { 10 + max_y };
-    println!(
-        "max_x is {max_x}; max_y is {max_y}; row of interest is {row_of_interest}; row is len {}",
-        row.len()
-    );
+    // println!(
+    //     "max_x is {max_x}; max_y is {max_y}; row of interest is {row_of_interest}; row is len {}",
+    //     row.len()
+    // );
 
     sensors
         .iter()
