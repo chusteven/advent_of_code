@@ -23,22 +23,28 @@ pub fn solution_1(input_file: &str) -> i32 {
     let lines = utils::read_file(input_file).unwrap();
     let (sensors, beacons) = parse_input(lines);
 
+    let mut offset_x = 0;
+    let mut offset_y = 0;
     let mut max_x = 0;
     let mut max_y = 0;
-    sensors.iter().for_each(|(x, y)| {
-        if *x > max_x {
-            max_x = *x;
+    sensors.iter().zip(beacons.iter()).for_each(|(s, b)| {
+        if s.0 > max_x {
+            max_x = s.0
         }
-        if *y > max_y {
-            max_y = *y;
+        if b.0 > max_x {
+            max_x = b.0
         }
-    });
-    beacons.iter().for_each(|(x, y)| {
-        if *x > max_x {
-            max_x = *x;
+        if s.1 > max_y {
+            max_y = s.1
         }
-        if *y > max_y {
-            max_y = *y;
+        if b.1 > max_y {
+            max_y = b.1
+        }
+        if (s.0 - b.0).abs() > offset_x {
+            offset_x = (s.0 - b.0).abs();
+        }
+        if (s.1 - b.1).abs() > offset_y {
+            offset_y = (s.1 - b.1).abs();
         }
     });
 
@@ -47,30 +53,30 @@ pub fn solution_1(input_file: &str) -> i32 {
     // and we that to index into the final grid
     //
     // Doubling to be conservative (probably too much...)
+    let offset_x = offset_x as usize;
+    let offset_y = offset_y as usize;
     let max_x = max_x as usize;
     let max_y = max_y as usize;
 
     // This is what's taking forever :(
-    println!("Filling -- ({max_y}, {max_y})");
-    // let mut grid =
-    //     vec![vec!['.'; ((max_x as f64 * 1.99) as usize) + 1]; ((max_y as f64 * 1.99) as usize) + 1];
-    let mut grid = vec![vec!['.'; max_x * 2 + 1]; max_y * 2 + 1];
+    println!("Filling -- ({offset_x}, {offset_y})");
+    let mut grid = vec![vec!['.'; offset_x + max_x + 1]; offset_y + max_y + 1];
     println!("Filled");
 
     println!("Marking");
     for (s, b) in sensors.iter().zip(beacons.iter()) {
-        grid[(max_y as i32 + s.1) as usize][(max_x as i32 + s.0) as usize] = 'S';
-        grid[(max_y as i32 + b.1) as usize][(max_x as i32 + b.0) as usize] = 'B';
+        grid[(offset_y as i32 + s.1) as usize][(offset_x as i32 + s.0) as usize] = 'S';
+        grid[(offset_y as i32 + b.1) as usize][(offset_x as i32 + b.0) as usize] = 'B';
     }
     println!("Marked");
 
     for (s, b) in sensors.iter().zip(beacons.iter()) {
-        mark_grid(s, b, &mut grid, &max_x, &max_y)
+        mark_grid(s, b, &mut grid, &offset_x, &offset_y)
     }
     let row_of_interest = if max_y > 2_000_000 { 2_000_000 } else { 10 };
     let mut ans = 0;
-    for i in 0..grid[max_y + row_of_interest].len() {
-        let val = grid[max_y + row_of_interest][i];
+    for i in 0..grid[offset_y + row_of_interest].len() {
+        let val = grid[offset_y + row_of_interest][i];
         if val == '#' || val == 'S' || val == 'B' {
             ans += 1;
         }
@@ -82,17 +88,17 @@ fn mark_grid(
     sensor: &(i32, i32),
     beacon: &(i32, i32),
     grid: &mut Vec<Vec<char>>,
-    max_x: &usize,
-    max_y: &usize,
+    offset_x: &usize,
+    offset_y: &usize,
 ) {
     // BFS outward; stopping condition is when Manhattan distance is farther
     // than it is now
     let mut queue: VecDeque<(usize, usize)> = VecDeque::new();
     queue.push_back((
-        (*max_x as i32 + sensor.0) as usize,
-        (*max_y as i32 + sensor.1) as usize,
+        (*offset_x as i32 + sensor.0) as usize,
+        (*offset_y as i32 + sensor.1) as usize,
     ));
-    let start = (sensor.0 + *max_x as i32, sensor.1 + *max_y as i32);
+    let start = (sensor.0 + *offset_x as i32, sensor.1 + *offset_y as i32);
     let manhattan_dist = (beacon.1 - sensor.1).abs() + (beacon.0 - sensor.0).abs();
     while !queue.is_empty() {
         let m = queue.pop_front().unwrap();
