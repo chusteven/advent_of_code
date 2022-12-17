@@ -1,4 +1,4 @@
-use std::collections::{hash_map::Entry, HashMap, HashSet, VecDeque};
+use std::collections::{hash_map::Entry, HashMap, VecDeque};
 
 use crate::yr_2022::problems::utils;
 
@@ -37,10 +37,6 @@ pub fn solution_2(input_file: &str) -> i32 {
         // Come to think of it, another way I could do it is simply inside a for
         // loop
 
-        println!(
-            "Starting to search from {:?} with MD of {:?}",
-            s, manhattan_dist
-        );
         let mut queue: VecDeque<(i32, i32)> = VecDeque::new();
         queue.push_back(*s);
         while !queue.is_empty() {
@@ -63,10 +59,8 @@ pub fn solution_2(input_file: &str) -> i32 {
                 queue.push_back(next);
             }
         }
-        println!("Finished search!");
     });
 
-    // println!("{:?}", taken_cords);
     for i in 0..max_coord {
         for j in 0..max_coord {
             let coordinate = (i, j);
@@ -82,7 +76,7 @@ pub fn solution_2(input_file: &str) -> i32 {
 }
 
 #[allow(dead_code)]
-pub fn solution_2_try_2(input_file: &str) -> i32 {
+pub fn solution_2_brute_force(input_file: &str) -> i32 {
     let lines = utils::read_file(input_file).unwrap();
     let (sensors, beacons) = parse_input(lines);
 
@@ -107,21 +101,16 @@ pub fn solution_2_try_2(input_file: &str) -> i32 {
 
                 let manhattan_dist = (sx - bx).abs() + (sy - by).abs();
                 let md_from_cur = (i - sx).abs() + (j - sy).abs();
-                if md_from_cur <= manhattan_dist {
-                    if !should_continue {
-                        should_continue = true;
-                        return;
-                    }
+                if md_from_cur <= manhattan_dist && !should_continue {
+                    should_continue = true;
                 }
             });
             if should_continue {
                 continue;
             }
-            println!("Found the answer at ({i}, {j})");
             return i * 4_000_000 + j;
         }
     }
-
     0
 }
 
@@ -141,10 +130,7 @@ pub fn solution_1(input_file: &str) -> i32 {
     sensors
         .iter()
         .zip(beacons.iter())
-        .map(|(s, b)| {
-            // print!("Mapping at original sensor [{:?}] and beacon [{:?}]", s, b);
-            ((s.0 + max_x, s.1 + max_y), (b.0 + max_x, b.1 + max_y))
-        })
+        .map(|(s, b)| ((s.0 + max_x, s.1 + max_y), (b.0 + max_x, b.1 + max_y)))
         .for_each(|(s, b)| {
             let (sx, sy) = s;
             let (bx, by) = b;
@@ -157,7 +143,6 @@ pub fn solution_1(input_file: &str) -> i32 {
             }
 
             let manhattan_dist = (sx - bx).abs() + (sy - by).abs();
-            // println!(" and manhattan dist is: {}", manhattan_dist);
 
             if (sy - row_of_interest).abs() <= manhattan_dist {
                 let diff = manhattan_dist - (sy - row_of_interest).abs();
